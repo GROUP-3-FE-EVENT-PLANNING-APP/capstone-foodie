@@ -1,18 +1,18 @@
 import React from "react";
 import Layout from "../components/Layout";
-import CardMyresto from "../components/CardMyresto";
+import CardRestoadmin from "../components/CardRestoadmin";
 
-const MyResto = () => {
+const AdminResto = () => {
   return (
     <Layout>
       <div className="h-screen">
-        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Resto</h1>
+        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List Resto</h1>
         <div className="flex flex-col justify-center">
-          <CardMyresto />
+          <CardRestoadmin />
         </div>
       </div>
     </Layout>
   );
 };
 
-export default MyResto;
+export default AdminResto;
