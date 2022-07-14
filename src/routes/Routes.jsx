@@ -6,6 +6,7 @@ import Register from '../pages/Register';
 import MyProfile from '../pages/MyProfile';
 import MyResto from '../pages/MyResto';
 import MyFavorite from '../pages/MyFavorite';
+import Booking from '../pages/Booking';
 
 function Rot() {
   return (
@@ -17,6 +18,7 @@ function Rot() {
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/myresto" element={<MyResto />} />
         <Route path="/myfavorite" element={<MyFavorite />} />
+        <Route path="/booking" element={<Booking />} />
 
         <Route
           path="*"
