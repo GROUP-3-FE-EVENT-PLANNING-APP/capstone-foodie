@@ -1,11 +1,12 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from '../pages/HomePage';
-import Login from '../pages/Login';
-import Register from '../pages/Register';
-import MyProfile from '../pages/MyProfile';
-import MyResto from '../pages/MyResto';
-import MyFavorite from '../pages/MyFavorite';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import Login from "../pages/Login";
+import Register from "../pages/Register";
+import MyProfile from "../pages/MyProfile";
+import MyResto from "../pages/MyResto";
+import MyFavorite from "../pages/MyFavorite";
+import AdminResto from "../pages/AdminResto";
 
 function Rot() {
   return (
@@ -17,11 +18,12 @@ function Rot() {
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/myresto" element={<MyResto />} />
         <Route path="/myfavorite" element={<MyFavorite />} />
+        <Route path="/adminresto" element={<AdminResto />} />
 
         <Route
           path="*"
           element={
-            <main style={{ padding: '1rem' }}>
+            <main style={{ padding: "1rem" }}>
               <p>There's nothing here!</p>
             </main>
           }
