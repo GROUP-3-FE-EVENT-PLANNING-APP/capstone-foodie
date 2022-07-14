@@ -7,6 +7,7 @@ import MyProfile from "../pages/MyProfile";
 import MyResto from "../pages/MyResto";
 import MyFavorite from "../pages/MyFavorite";
 import AdminResto from "../pages/AdminResto";
+import Detail from "../pages/Detail";
 
 function Rot() {
   return (
@@ -19,6 +20,7 @@ function Rot() {
         <Route path="/myresto" element={<MyResto />} />
         <Route path="/myfavorite" element={<MyFavorite />} />
         <Route path="/adminresto" element={<AdminResto />} />
+        <Route path="/detail" element={<Detail />} />
 
         <Route
           path="*"
