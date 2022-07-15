@@ -1,18 +1,18 @@
 import React from "react";
+import CardUser from "../components/CardUser";
 import Layout from "../components/Layout";
-import CardMyfavorite from "../components/CardMyfavorite";
 
-const MyFavorite = () => {
+const ListUser = () => {
   return (
     <Layout>
       <div className="h-screen">
-        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Favorite</h1>
+        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List User</h1>
         <div className="flex flex-col justify-center">
-          <CardMyfavorite />
+          <CardUser />
         </div>
       </div>
     </Layout>
   );
 };
 
-export default MyFavorite;
+export default ListUser;

@@ -6,7 +6,11 @@ import Register from "../pages/Register";
 import MyProfile from "../pages/MyProfile";
 import MyResto from "../pages/MyResto";
 import MyFavorite from "../pages/MyFavorite";
+import AdminResto from "../pages/AdminResto";
 import Detail from "../pages/Detail";
+import ListUser from "../pages/ListUser";
+import AddResto from "../pages/AddResto";
+import Booking from "../pages/Booking";
 
 function Rot() {
   return (
@@ -18,8 +22,11 @@ function Rot() {
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/myresto" element={<MyResto />} />
         <Route path="/myfavorite" element={<MyFavorite />} />
-        <Route path="/detail" element={<Detail />} />
-
+        <Route path="/booking" element={<Booking />} />
+        <Route path="/adminresto" element={<AdminResto />} />
+        <Route path="/listuser" element={<ListUser />} />
+        <Route path="/addresto" element={<AddResto />} />
+        <Route path="/detail/:detail_id" element={<Detail />} />
         <Route
           path="*"
           element={

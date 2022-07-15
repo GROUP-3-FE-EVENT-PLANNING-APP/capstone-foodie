@@ -1,18 +1,18 @@
 import React from "react";
 import Layout from "../components/Layout";
-import CardMyfavorite from "../components/CardMyfavorite";
+import CardRestoadmin from "../components/CardRestoadmin";
 
-const MyFavorite = () => {
+const AdminResto = () => {
   return (
     <Layout>
       <div className="h-screen">
-        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Favorite</h1>
+        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List Resto</h1>
         <div className="flex flex-col justify-center">
-          <CardMyfavorite />
+          <CardRestoadmin />
         </div>
       </div>
     </Layout>
   );
 };
 
-export default MyFavorite;
+export default AdminResto;
