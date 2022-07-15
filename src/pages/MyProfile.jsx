@@ -1,7 +1,43 @@
 import React from 'react';
 import Layout from '../components/Layout';
+import { useState, useEffect } from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
 
 const MyProfile = () => {
+  const [profile, setProfile] = useState();
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getmyProfile();
+  }, []);
+
+  const getmyProfile = () => {
+    axios({
+      method: 'get',
+      url: `https://group3.altaproject.online/myprofile`,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
+      .then((response) => {
+        // handle success
+        const results = response.data.data;
+        setProfile(results);
+      })
+      .catch(function (error) {
+        // handle error
+        swal({
+          title: 'Good job!',
+          text: 'EROOR',
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   return (
     <Layout>
       <div className="flex justify-center py-3 text-center mx-auto">
