@@ -1,11 +1,28 @@
-import React from "react";
+//import React from "react";
+import * as React from "react";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 
 const CommentForms = (props) => {
+  const [value, setValue] = React.useState(2);
+
   return (
     <div className="comment-form flex mx-auto lg:pl-5">
       <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+        <h2 className="pt-3 pb-2 text-lg font-medium">Comments and Rating</h2>
+
+        <div>
+          {" "}
+          <Rating
+            name="simple-controlled"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+              console.log(newValue);
+            }}
+          />
+        </div>
         <div className="flex flex-wrap -mx-3 mb-6">
-          <h2 className="px-4 pt-3 pb-2 text-lg font-medium">Comments</h2>
           <div className="w-full px-3 mb-2 mt-2">
             <textarea
               onChange={props.onChange}

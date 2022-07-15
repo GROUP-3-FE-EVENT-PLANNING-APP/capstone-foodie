@@ -5,6 +5,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import Button from "@mui/material/Button";
 import CommentList from "../components/CommentList";
 import CommentForms from "../components/CommentForms";
+import { AiFillStar } from "react-icons/ai";
 
 const Detail = () => {
   return (
@@ -13,39 +14,53 @@ const Detail = () => {
       <div className="container px-5 mx-auto lg:px-20">
         <div className="grid-cols-3 px-5 py-5 space-y-2 bg-gray-50 lg:space-y-0 lg:grid lg:gap-3">
           <div className="w-full col-span-2 row-span-2 rounded">
-            <div className=" ml-2 -mt-2 absolute bg-green-600 w-14 h-14 shadow flex flex-col-reverse p-2 text-center font-bold text-white rounded-b-full">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/3165/3165146.png"
-                alt=""
-              />
-            </div>
             <img
+              className="w-full h-full"
               src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
+              //src="https://images.unsplash.com/photo-1532619031801-97b02fb2de1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
               alt=""
             />
           </div>
-          <div className="w-full rounded">
+          <div>
             <img
+              className="w-full h-full"
+              //src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
               src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
               alt=""
             />
           </div>
-          <div className="w-full rounded">
+          <div>
             <img
+              className="w-full h-full"
+              //src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
               src="https://images.unsplash.com/photo-1532619031801-97b02fb2de1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
               alt=""
             />
           </div>
         </div>
 
+        <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
+          <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
+            Halal
+          </span>
+        </div>
+        <div className="flex justify-end">
+          <Button className="mx-5" variant="contained" color="success">
+            Favorite
+          </Button>
+          <Button variant="contained">Book now</Button>
+        </div>
         <div className="px-10">
           <div className="pt-5 text-2xl font-medium">Bebek Tepi Sawah</div>
-          <div className="pb-5 text-sm font-light">Ubud - Bali</div>
+          <div className="text-sm font-light">Ubud - Bali</div>
+          <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
+            4.0 <AiFillStar />
+          </p>
         </div>
 
         <div className="mb-5 lg:flex flex-row justify-center">
           {/* left side */}
-          <div className="text-xl px-5 md:pr-24 md:pl-10 py-8 shadow-xl bg-yellow-50">
+          <div className="text-xl px-5 lg:pr-24 lg:pl-10 py-8 shadow-xl bg-yellow-50">
             Menu
             <img
               className="w-96 mb-5"
@@ -55,7 +70,7 @@ const Detail = () => {
             />
           </div>
           {/* right side */}
-          <div className="shadow-xl px-5 md:pl-24 md:pr-10 py-8 bg-yellow-50">
+          <div className="shadow-xl px-5 lg:pl-24 lg:pr-10 py-8 bg-yellow-50">
             <div className="mb-5">
               <div className="text-xl">Fasilitas</div>
               <ul className="text-sm pl-10">
@@ -75,52 +90,8 @@ const Detail = () => {
           </div>
         </div>
 
-        <div className="flex justify-around">
-          <Button variant="contained">Booking</Button>
-          <Button variant="contained" color="success">
-            Favorite
-          </Button>
-        </div>
         {/* star rating */}
-        <div className="flex ">
-          <div className="flex items-center mt-2 mb-4">
-            <svg
-              className="mx-1 w-4 h-4 fill-current text-yellow-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-            </svg>
-            <svg
-              className="mx-1 w-4 h-4 fill-current text-yellow-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-            </svg>
-            <svg
-              className="mx-1 w-4 h-4 fill-current text-yellow-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-            </svg>
-            <svg
-              className="mx-1 w-4 h-4 fill-current text-yellow-500"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-            </svg>
-            <svg
-              className="mx-1 w-4 h-4 fill-current text-gray-400"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-            >
-              <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
-            </svg>
-          </div>
-        </div>
+
         {/* comment */}
         <div>
           <CommentForms></CommentForms>
