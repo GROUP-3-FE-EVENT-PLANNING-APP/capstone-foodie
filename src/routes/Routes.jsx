@@ -8,6 +8,8 @@ import MyResto from "../pages/MyResto";
 import MyFavorite from "../pages/MyFavorite";
 import AdminResto from "../pages/AdminResto";
 import Detail from "../pages/Detail";
+import ListUser from "../pages/ListUser";
+import AddResto from "../pages/AddResto";
 
 function Rot() {
   return (
@@ -21,6 +23,8 @@ function Rot() {
         <Route path="/myfavorite" element={<MyFavorite />} />
         <Route path="/adminresto" element={<AdminResto />} />
         <Route path="/detail" element={<Detail />} />
+        <Route path="/listuser" element={<ListUser />} />
+        <Route path="/addresto" element={<AddResto />} />
 
         <Route
           path="*"

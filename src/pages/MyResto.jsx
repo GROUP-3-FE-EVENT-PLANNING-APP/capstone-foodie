@@ -10,6 +10,15 @@ const MyResto = () => {
         <div className="flex flex-col justify-center">
           <CardMyresto />
         </div>
+        <div className="text-center">
+          <p className="text-center text-2xl">Kamu tidak memiliki resto</p>
+          <button
+            type="submit"
+            className="text-center py-2 px-4 mr-3 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
+          >
+            Buat Resto
+          </button>
+        </div>
       </div>
     </Layout>
   );
