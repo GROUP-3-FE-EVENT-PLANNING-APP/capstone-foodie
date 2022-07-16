@@ -11,6 +11,7 @@ import Detail from "../pages/Detail";
 import ListUser from "../pages/ListUser";
 import AddResto from "../pages/AddResto";
 import Booking from "../pages/Booking";
+import EditResto from "../pages/EditResto";
 
 function Rot() {
   return (
@@ -27,6 +28,7 @@ function Rot() {
         <Route path="/listuser" element={<ListUser />} />
         <Route path="/addresto" element={<AddResto />} />
         <Route path="/detail/:detail_id" element={<Detail />} />
+        <Route path="/editresto" element={<EditResto />} />
         <Route
           path="*"
           element={
