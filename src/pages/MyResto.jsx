@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "../components/Layout";
 import CardMyresto from "../components/CardMyresto";
+import { Link } from "react-router-dom";
 
 const MyResto = () => {
   return (
@@ -16,7 +17,7 @@ const MyResto = () => {
             type="submit"
             className="text-center py-2 px-4 mr-3 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
           >
-            Buat Resto
+            <Link to="/addresto">Buat Resto</Link>
           </button>
         </div>
       </div>

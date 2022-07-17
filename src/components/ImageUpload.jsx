@@ -29,18 +29,16 @@ export default class MultipleImageUploadComponent extends Component {
             <img src={url} width="210" height="210" />
           ))}
         </span>
-        <div className="form-group">
-          <input
-            id="input-banner-resto"
-            type="file"
-            className="ml-5 bg-white py-2 px-3 border border-gray-300 shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            onChange={this.uploadMultipleFiles}
-            multiple
-          />
-        </div>
+        <input
+          id="input-banner-resto"
+          type="file"
+          className="ml-5 bg-white py-2 px-3 border border-gray-300 shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onChange={this.uploadMultipleFiles}
+          multiple
+        />
         <button
           type="button"
-          className="py-2 px-4 mr-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
+          className="flex-col py-2 px-4 ml-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
           onClick={this.uploadFiles}
         >
           Upload

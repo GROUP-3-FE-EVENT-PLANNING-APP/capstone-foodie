@@ -11,7 +11,11 @@ import Detail from "../pages/Detail";
 import ListUser from "../pages/ListUser";
 import AddResto from "../pages/AddResto";
 import Booking from "../pages/Booking";
+<<<<<<< HEAD
 import DetailAdmin from "../pages/DetailAdmin";
+=======
+import EditResto from "../pages/EditResto";
+>>>>>>> d5d47c2339fc627443a762be6e4f4123cc1bc7c7
 
 function Rot() {
   return (
@@ -28,7 +32,11 @@ function Rot() {
         <Route path="/listuser" element={<ListUser />} />
         <Route path="/addresto" element={<AddResto />} />
         <Route path="/detail/:detail_id" element={<Detail />} />
+<<<<<<< HEAD
         <Route path="/admindetail" element={<DetailAdmin />} />
+=======
+        <Route path="/editresto" element={<EditResto />} />
+>>>>>>> d5d47c2339fc627443a762be6e4f4123cc1bc7c7
         <Route
           path="*"
           element={
