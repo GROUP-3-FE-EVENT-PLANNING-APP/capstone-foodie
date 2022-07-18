@@ -44,7 +44,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://54.197.118.126/login", {
+      .post("https://group3.altaproject.online/login", {
         email: email,
         password: password,
       })
