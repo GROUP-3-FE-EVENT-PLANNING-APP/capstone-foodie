@@ -82,13 +82,7 @@ const Detail = () => {
             </span>
           </div>
           <div className="flex justify-end">
-            <div className="mx-5">
-              <Button variant="outlined" color="error">
-                Favorite
-              </Button>
-            </div>
-
-            <Button variant="contained">Book now</Button>
+            <Button variant="contained">Verify now</Button>
           </div>
           <div className="px-10">
             <div className="pt-5 text-2xl font-medium">Bebek Tepi Sawah</div>
@@ -97,19 +91,28 @@ const Detail = () => {
               4.0 <AiFillStar />
             </p>
           </div>
+          {/* owner file */}
+          <div>
+            <div className="pl-10 text-lg font-medium">Owner Information</div>
+            <div className="pl-14 pb-5">Nama : Kania Ratna Paramita</div>
+            <img
+              className="w-96 lg:mx-5 mb-10 px-5"
+              src="https://3.bp.blogspot.com/-FW2khSczuTU/UV95Wt115vI/AAAAAAAAALA/Sx2lwPRdUZc/s1600/surat%252Bijin.jpg"
+              alt=""
+            />
+          </div>
           <div className="mb-5 lg:flex flex-row justify-center">
             {/* left side */}
-            <div className="text-xl px-5 lg:pr-24 lg:pl-24 py-8 shadow-lg">
+            <div className="text-xl px-5 lg:pr-24 lg:pl-24 py-8 shadow-xl">
               Menu
               <img
                 className="w-96 mb-5"
                 src="https://ik.imagekit.io/tvlk/cul-asset/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/cul-assets-252301483284-b172d73b6c43cddb/culinary/asset/REST_201-720x995-FIT_AND_TRIM-2898ffc03f8ac72f6e72f108f015ea1a.jpeg?tr=q-40,c-at_max,w-720,h-1280&amp;_src=imagekit"
-                //src="https://b.zmtcdn.com/data/menus/805/7412805/ad0cc3792bdebc4ef970f38193ed5ede.jpg"
                 alt=""
               />
             </div>
             {/* right side */}
-            <div className="shadow-lg px-5 lg:pl-24 lg:pr-24 py-8">
+            <div className="shadow-xl px-5 lg:pl-24 lg:pr-24 py-8">
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
                 <ul className="text-sm pl-10">
@@ -127,11 +130,6 @@ const Detail = () => {
                 <Map></Map>
               </div>
             </div>
-          </div>{" "}
-          {/* comment */}
-          <div>
-            <CommentForms></CommentForms>
-            <CommentList></CommentList>
           </div>
         </div>
       </Layout>

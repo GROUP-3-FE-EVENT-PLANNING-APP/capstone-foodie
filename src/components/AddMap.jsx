@@ -20,7 +20,7 @@ function AddMap() {
   const [longitude, setLongitude] = useState(center.lng);
 
   //const position = [-6.597629, 106.799568];
-  const [draggable, setDraggable] = useState(false);
+  const [draggable, setDraggable] = useState(true);
   const [position, setPosition] = useState(center);
   const markerRef = useRef(null);
   const eventHandlers = useMemo(
@@ -54,11 +54,12 @@ function AddMap() {
             ref={markerRef}
           >
             <Popup minWidth={90}>
-              <span onClick={toggleDraggable}>
+              My Restaurant Location
+              {/* <span onClick={toggleDraggable}>
                 {draggable
                   ? "Marker is draggable"
                   : "Click here to make marker draggable"}
-              </span>
+              </span> */}
             </Popup>
           </Marker>
         </MapContainer>
@@ -75,17 +76,6 @@ function AddMap() {
             className="border-solid border-2 border-gray-400"
             placeholder={position.lng}
           ></input>{" "}
-          <button
-            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
-            onClick={() => {
-              setPosition(position);
-              console.log(position);
-              setLatitude(position.lat);
-              setLongitude(position.lng);
-            }}
-          >
-            Set
-          </button>
         </div>
       </div>
     )
