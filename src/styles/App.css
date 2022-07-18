@@ -1,3 +1,15 @@
+.leaflet-container {
+  width: 25vw;
+  height: 25vh;
+}
+
+@media screen and (max-width: 1000px) {
+  .leaflet-container {
+    width: 80vw;
+    height: 25vh;
+  }
+}
+
 .App {
   text-align: center;
 }
@@ -15,10 +27,6 @@
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-.leaflet-container {
-  width: 25vw;
-  height: 25vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
