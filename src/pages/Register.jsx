@@ -46,7 +46,7 @@ const Register = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post(`http://54.197.118.126/users`, {
+      .post("https://group3.altaproject.online/users", {
         name: name,
         email: email,
         password: password,
