@@ -66,10 +66,12 @@ function AddMap() {
         <div className="text-left mt-3">
           {" "}
           <input
+            disabled
             className="border-solid border-2 border-gray-400"
             placeholder={position.lat}
           ></input>{" "}
           <input
+            disabled
             className="border-solid border-2 border-gray-400"
             placeholder={position.lng}
           ></input>{" "}

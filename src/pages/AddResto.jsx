@@ -97,7 +97,20 @@ const AddResto = () => {
                 </div>
               </div>
               <div className="mb-5 mt-5">
-                <p>Location</p>
+                <div className="col-span-3 sm:col-span-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Location
+                  </label>
+                  <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
+                    <input
+                      type="text"
+                      name="Location"
+                      id="input-kapasitas"
+                      className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                      placeholder="Location"
+                    />
+                  </div>
+                </div>
                 <AddMap />
               </div>
 
