@@ -1,13 +1,24 @@
+<<<<<<< HEAD
+import React from 'react';
+import Layout from '../components/Layout';
+import CardRestoadmin from '../components/CardRestoadmin';
+import { useState, useEffect } from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+=======
 import React from "react";
 import Layout from "../components/Layout";
 import CardRestoadmin from "../components/CardRestoadmin";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
 import axios from "axios";
+>>>>>>> bb6be860576b8ffdd7b7c59ce8acb79a0608d66e
 
 const AdminResto = () => {
   const [daftarresto, setDaftarResto] = useState();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getAdminRestaurant();
@@ -53,6 +64,9 @@ const AdminResto = () => {
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List Resto</h1>
           <div className="flex flex-col justify-center">
             {daftarresto.map((item, index) => (
+<<<<<<< HEAD
+              <CardRestoadmin key={index} title={item.resto_name} location={item.location} rating={item.rating} status={item.status} category={item.category} onClickItem={() => navigate(`/admindetail/${item.id}`)} />
+=======
               <CardRestoadmin
                 key={index}
                 title={item.resto_name}
@@ -61,6 +75,7 @@ const AdminResto = () => {
                 status={item.status}
                 category={item.category}
               />
+>>>>>>> bb6be860576b8ffdd7b7c59ce8acb79a0608d66e
             ))}
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
 
-const CardRestoadmin = ({ title, location, rating, status, onClick, category }) => {
+const CardRestoadmin = ({ title, location, rating, status, onClick, category, onClickItem }) => {
   return (
     <div className="flex justify-center mx-10 mb-5">
       <div className="container grow flex flex-col bg-white max-w-sm mx-auto rounded-md  text-black border-1 shadow-lg mb-3 mt-3">
@@ -27,6 +27,7 @@ const CardRestoadmin = ({ title, location, rating, status, onClick, category }) 
           <button
             type="submit"
             className="inline-flex justify-center py-2 px-4 mr-3 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
+            onClick={onClickItem}
           >
             Detail
           </button>
