@@ -1,14 +1,15 @@
-import React from "react";
-import Layout from "../components/Layout";
-import Map from "../components/Map";
-import PlaceIcon from "@mui/icons-material/Place";
-import Button from "@mui/material/Button";
-import CommentList from "../components/CommentList";
-import CommentForms from "../components/CommentForms";
-import { AiFillStar } from "react-icons/ai";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from 'react';
+import Layout from '../components/Layout';
+import Map from '../components/Map';
+import PlaceIcon from '@mui/icons-material/Place';
+import Button from '@mui/material/Button';
+import CommentList from '../components/CommentList';
+import CommentForms from '../components/CommentForms';
+import { AiFillStar } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
 
 const Detail = () => {
   const [data, setData] = useState({});
@@ -21,22 +22,32 @@ const Detail = () => {
 
   function fetchData() {
     console.log(params);
-    const { detail_id } = params;
-    axios
-      .get(
-        `https://my-json-server.typicode.com/Maruta45/mockjson/events/${detail_id}`
-      )
+    const { admindetail_id } = params;
+    axios({
+      method: 'get',
+      url: `https://group3.altaproject.online/admins/restaurants/${admindetail_id}
+      `,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
       .then((response) => {
         // handle success
-        console.log(response.data);
-        const { data } = response;
-        setData(data);
+        const results = response.data.data;
+        console.log(results);
+        setData(results);
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        swal({
+          title: 'Good job!',
+          text: 'EROOR',
+        });
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
   }
 
   if (loading) {
@@ -54,7 +65,7 @@ const Detail = () => {
             <div className="w-full col-span-2 row-span-2 rounded">
               <img
                 className="w-full h-full"
-                src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
+                src={data.file_image_url}
                 //src="https://images.unsplash.com/photo-1532619031801-97b02fb2de1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
                 alt=""
               />
@@ -77,16 +88,14 @@ const Detail = () => {
             </div>
           </div>
           <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
-            <span className="font-medium py-1 px-2 text-green-500 align-middle">
-              Halal
-            </span>
+            <span className="font-medium py-1 px-2 text-green-500 align-middle">{data.category}</span>
           </div>
           <div className="flex justify-end">
             <Button variant="contained">Verify now</Button>
           </div>
           <div className="px-10">
-            <div className="pt-5 text-2xl font-medium">Bebek Tepi Sawah</div>
-            <div className="text-sm font-light">Ubud - Bali</div>
+            <div className="pt-5 text-2xl font-medium">{data.resto_name}</div>
+            <div className="text-sm font-light">{data.location}</div>
             <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
               4.0 <AiFillStar />
             </p>
@@ -94,12 +103,8 @@ const Detail = () => {
           {/* owner file */}
           <div>
             <div className="pl-10 text-lg font-medium">Owner Information</div>
-            <div className="pl-14 pb-5">Nama : Kania Ratna Paramita</div>
-            <img
-              className="w-96 lg:mx-5 mb-10 px-5"
-              src="https://3.bp.blogspot.com/-FW2khSczuTU/UV95Wt115vI/AAAAAAAAALA/Sx2lwPRdUZc/s1600/surat%252Bijin.jpg"
-              alt=""
-            />
+            <div className="pl-14 pb-5">{data.owner_name}</div>
+            <img className="w-96 lg:mx-5 mb-10 px-5" src="https://3.bp.blogspot.com/-FW2khSczuTU/UV95Wt115vI/AAAAAAAAALA/Sx2lwPRdUZc/s1600/surat%252Bijin.jpg" alt="" />
           </div>
           <div className="mb-5 lg:flex flex-row justify-center">
             {/* left side */}
@@ -121,12 +126,12 @@ const Detail = () => {
                   <li type="circle">Musholla</li>
                 </ul>
               </div>
-              <div>Kapasitas Meja : 20</div>
-              <div className="mb-5">Harga Booking : Rp. 50.000</div>
+              <div>Tabel : {data.table_quota}</div>
+              <div className="mb-5">Harga Booking : Rp.{data.booking_fee}</div>
               <div>
                 <PlaceIcon />
                 Location
-                <div className="text-sm">Ubud - Bali</div>
+                <div className="text-sm">{data.location}</div>
                 <Map></Map>
               </div>
             </div>
