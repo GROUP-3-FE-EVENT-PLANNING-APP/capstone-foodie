@@ -1,14 +1,15 @@
-import React from "react";
-import Layout from "../components/Layout";
-import Map from "../components/Map";
-import PlaceIcon from "@mui/icons-material/Place";
-import Button from "@mui/material/Button";
-import CommentList from "../components/CommentList";
-import CommentForms from "../components/CommentForms";
-import { AiFillStar } from "react-icons/ai";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import React from 'react';
+import Layout from '../components/Layout';
+import Map from '../components/Map';
+import PlaceIcon from '@mui/icons-material/Place';
+import Button from '@mui/material/Button';
+import CommentList from '../components/CommentList';
+import CommentForms from '../components/CommentForms';
+import { AiFillStar } from 'react-icons/ai';
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 const Detail = () => {
   const [data, setData] = useState({});
@@ -23,9 +24,7 @@ const Detail = () => {
     console.log(params);
     const { detail_id } = params;
     axios
-      .get(
-        `https://my-json-server.typicode.com/Maruta45/mockjson/events/${detail_id}`
-      )
+      .get(`https://group3.altaproject.online/restaurants/1`)
       .then((response) => {
         // handle success
         console.log(response.data);
@@ -38,6 +37,30 @@ const Detail = () => {
       })
       .finally(() => setLoading(false));
   }
+
+  const addToFavorite = () => {
+    axios({
+      method: 'post',
+      url: 'https://group3.altaproject.online/favourites/1',
+      data: {
+        id: 1,
+      },
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        swal({
+          title: 'Good job!',
+          text: 'SUCCESS POST',
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   if (loading) {
     return (
@@ -54,7 +77,7 @@ const Detail = () => {
             <div className="w-full col-span-2 row-span-2 rounded">
               <img
                 className="w-full h-full"
-                src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
+                src={data.data.file_image_url}
                 //src="https://images.unsplash.com/photo-1532619031801-97b02fb2de1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
                 alt=""
               />
@@ -77,13 +100,11 @@ const Detail = () => {
             </div>
           </div>
           <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
-            <span className="font-medium py-1 px-2 text-green-500 align-middle">
-              Halal
-            </span>
+            <span className="font-medium py-1 px-2 text-green-500 align-middle">Halal</span>
           </div>
           <div className="flex justify-end">
             <div className="mx-5">
-              <Button variant="outlined" color="error">
+              <Button variant="outlined" color="error" onClick={() => addToFavorite()}>
                 Favorite
               </Button>
             </div>
@@ -91,8 +112,8 @@ const Detail = () => {
             <Button variant="contained">Book now</Button>
           </div>
           <div className="px-10">
-            <div className="pt-5 text-2xl font-medium">Bebek Tepi Sawah</div>
-            <div className="text-sm font-light">Ubud - Bali</div>
+            <div className="pt-5 text-2xl font-medium">{data.data.resto_name}</div>
+            <div className="text-sm font-light">{data.data.location}</div>
             <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
               4.0 <AiFillStar />
             </p>
@@ -127,7 +148,7 @@ const Detail = () => {
                 <Map></Map>
               </div>
             </div>
-          </div>{" "}
+          </div>{' '}
           {/* comment */}
           <div>
             <CommentForms></CommentForms>
