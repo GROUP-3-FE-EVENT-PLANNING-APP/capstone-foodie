@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect, useState } from "react";
+
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "../styles/App.css";
@@ -10,8 +12,10 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-const Map = () => {
-  const position = [-8.518535930659905, 115.27421684456047];
+const Map = (props) => {
+  //const position = [-8.618535930659905, 115.27421684456047];
+  const position = [props.latitude, props.longitude];
+
   return (
     <div>
       <div className="App">
@@ -21,7 +25,7 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={position}>
-            <Popup>Bebek tepi sawah</Popup>
+            <Popup>{props.name}</Popup>
           </Marker>
         </MapContainer>
       </div>

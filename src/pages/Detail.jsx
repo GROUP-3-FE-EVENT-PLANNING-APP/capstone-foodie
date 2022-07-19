@@ -10,27 +10,29 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const Detail = () => {
+const Detail = (props) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const params = useParams();
+  const [comments, setComments] = useState([]);
+  const [commentInput, setCommentInput] = useState("");
+  const [rating, setRating] = useState(5);
 
   useEffect(() => {
     fetchData();
+    fetchComments();
   }, []);
 
   function fetchData() {
-    console.log(params);
+    //console.log(params);
     const { detail_id } = params;
     axios
-      .get(
-        `https://my-json-server.typicode.com/Maruta45/mockjson/events/${detail_id}`
-      )
+      .get(`https://group3.altaproject.online/restaurants/2`)
+      // .get(`https://group3.altaproject.online/${detail_id}`)
       .then((response) => {
         // handle success
-        console.log(response.data);
         const { data } = response;
-        setData(data);
+        setData(data.data);
       })
       .catch(function (error) {
         // handle error
@@ -38,6 +40,50 @@ const Detail = () => {
       })
       .finally(() => setLoading(false));
   }
+
+  function fetchComments(props) {
+    const { detail_id } = params;
+    axios
+      .get(`https://group3.altaproject.online/comments/2`)
+      .then((response) => {
+        // handle success
+        const { data } = response;
+        setComments(data.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .finally(() => setLoading(false));
+  }
+
+  const postComment = async (props) => {
+    setLoading(true);
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+
+      body: JSON.stringify({
+        comment: commentInput,
+        rating: rating,
+      }),
+    };
+    await fetch(`https://group3.altaproject.online/comments/2`, requestOptions)
+      .then((response) => response.json())
+      .then((data) => {
+        fetchComments();
+        fetchData();
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        //setLoading(false);
+      });
+  };
 
   if (loading) {
     return (
@@ -54,8 +100,7 @@ const Detail = () => {
             <div className="w-full col-span-2 row-span-2 rounded">
               <img
                 className="w-full h-full"
-                src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
-                //src="https://images.unsplash.com/photo-1532619031801-97b02fb2de1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                src={data.resto_images[0].resto_image_url}
                 alt=""
               />
             </div>
@@ -91,10 +136,10 @@ const Detail = () => {
             <Button variant="contained">Book now</Button>
           </div>
           <div className="px-10">
-            <div className="pt-5 text-2xl font-medium">Bebek Tepi Sawah</div>
-            <div className="text-sm font-light">Ubud - Bali</div>
+            <div className="pt-5 text-2xl font-medium">{data.resto_name}</div>
+            <div className="text-sm font-light">{data.location}</div>
             <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
-              4.0 <AiFillStar />
+              {data.rating} <AiFillStar />
             </p>
           </div>
           <div className="mb-5 lg:flex flex-row justify-center">
@@ -103,7 +148,7 @@ const Detail = () => {
               Menu
               <img
                 className="w-96 mb-5"
-                src="https://ik.imagekit.io/tvlk/cul-asset/guys1L+Yyer9kzI3sp-pb0CG1j2bhflZGFUZOoIf1YOBAm37kEUOKR41ieUZm7ZJ/cul-assets-252301483284-b172d73b6c43cddb/culinary/asset/REST_201-720x995-FIT_AND_TRIM-2898ffc03f8ac72f6e72f108f015ea1a.jpeg?tr=q-40,c-at_max,w-720,h-1280&amp;_src=imagekit"
+                src={data.menu_image_url}
                 //src="https://b.zmtcdn.com/data/menus/805/7412805/ad0cc3792bdebc4ef970f38193ed5ede.jpg"
                 alt=""
               />
@@ -113,25 +158,39 @@ const Detail = () => {
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
                 <ul className="text-sm pl-10">
-                  <li type="circle">Taman Bermain</li>
-                  <li type="circle">Kamar Mandi</li>
-                  <li type="circle">Musholla</li>
+                  <li type="circle">{data.facilities[0].facility}</li>
                 </ul>
               </div>
-              <div>Kapasitas Meja : 20</div>
-              <div className="mb-5">Harga Booking : Rp. 50.000</div>
+              <div>Kapasitas Meja : {data.table_quota}</div>
+              <div className="mb-5">Harga Booking : Rp. {data.booking_fee}</div>
               <div>
                 <PlaceIcon />
                 Location
-                <div className="text-sm">Ubud - Bali</div>
-                <Map></Map>
+                <div className="text-sm">{data.location}</div>
+                <Map
+                  name={data.resto_name}
+                  latitude={data.latitude}
+                  longitude={data.longitude}
+                />
               </div>
             </div>
-          </div>{" "}
+          </div>
           {/* comment */}
           <div>
-            <CommentForms></CommentForms>
-            <CommentList></CommentList>
+            <CommentForms
+              onChange={(e) => setCommentInput(e.target.value)}
+              onChangeRating={(e) => setRating(e.target.newValue)}
+              //onChangeValue={(e) => setRating(e.target.value)}
+              submitComment={() => postComment()}
+            />
+            {comments.map((comments) => (
+              <CommentList
+                key={comments.user_id}
+                comment={comments.comment}
+                name={comments.name}
+                avatar={comments.avatar_url}
+              />
+            ))}
           </div>
         </div>
       </Layout>
