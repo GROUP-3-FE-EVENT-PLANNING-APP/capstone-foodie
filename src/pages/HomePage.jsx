@@ -7,25 +7,27 @@ import axios from "axios";
 import "../styles/App.css";
 
 const HomePage = () => {
-  const [product, setProduct] = useState([]);
+  const [resto, setResto] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchProduct();
+    fetchResto();
   }, []);
-  const fetchProduct = () => {
+
+  const fetchResto = () => {
     axios
-      .get(
-        `https://group3.altaproject.online/restaurants
-      `
-      )
+      .get(`https://group3.altaproject.online/restaurants`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((response) => {
         // handle success
         console.log(response);
 
-        const results = response.data;
-        setProduct(results);
+        const results = response.data.data;
+        setResto(results);
       })
       .catch(function (error) {
         // handle error
@@ -87,14 +89,14 @@ const HomePage = () => {
         </div>
 
         <div className="grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-4 lg:grid-cols-4 m-2 gap-3">
-          {product.map((item) => (
+          {resto.map((item) => (
             <CardHomePage
-              key={item.event.id}
-              title={item.event.name}
-              quantity={item.qty}
-              price={item.event.location}
-              product={item.description}
-              image={item.event.image}
+              key={item.id}
+              restoname={item.resto_name}
+              location={item.location}
+              category={item.category}
+              rating={item.rating}
+              image={item.resto_images.map((tr) => tr.resto_image_url)}
               onClickItem={() => navigate(`detail/${item.id}`)}
             />
           ))}

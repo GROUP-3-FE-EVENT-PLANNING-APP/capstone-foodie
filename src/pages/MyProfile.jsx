@@ -10,6 +10,8 @@ const MyProfile = () => {
   const [loading, setLoading] = useState(true);
   const [remove, setRemove] = useState();
   const [objSubmit, setObjSubmit] = useState('');
+  const [avatar_url, setAvatar] = useState('');
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -19,7 +21,8 @@ const MyProfile = () => {
   const getmyProfile = () => {
     axios({
       method: 'get',
-      url: `https://virtserver.swaggerhub.com/iswanulumam/E-commerceApp/1.0.0/users/1`,
+      url: `https://group3.altaproject.online/myprofile
+      `,
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -44,7 +47,7 @@ const MyProfile = () => {
 
   const handleRemove = (id) => {
     axios
-      .delete(`https://virtserver.swaggerhub.com/iswanulumam/E-commerceApp/1.0.0/users/${id} `, {
+      .delete(`https://group3.altaproject.online/users `, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -122,23 +125,24 @@ const MyProfile = () => {
   } else {
     return (
       <Layout>
-        <div className="flex justify-center py-3 text-center mx-auto">
-          <div className="bg-gray-50 px-4 py-5 rounded-lg shadow-lg text-center w-48">
-            <div className="mb-4">
-              <img
-                className="w-auto mx-auto rounded-full object-cover object-center"
-                src="https://i1.pngguru.com/preview/137/834/449/cartoon-cartoon-character-avatar-drawing-film-ecommerce-facial-expression-png-clipart.jpg"
-                alt="Avatar Upload"
-              />
+        <form className="text-center" onSubmit={(e) => handleSubmit(e)}>
+          <div className="flex justify-center py-3 text-center mx-auto">
+            <div className="bg-gray-50 px-4 py-5 rounded-lg  text-center w-48">
+              <div className="mb-4">
+                <img className="w-auto mx-auto rounded-full object-cover object-center" src={profile.avatar_url} alt="Avatar Upload" />
+              </div>
+              <label className="cursor-pointer mt-6">
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    setAvatar(URL.createObjectURL(e.target.files[0]));
+                    handleChange(e.target.files[0], 'avatar_url');
+                    //console.log(e.target.files[0]);
+                  }}
+                />
+              </label>
             </div>
-            <label className="cursor-pointer mt-6">
-              <span className="mt-2  leading-normal px-4 py-2 bg-blue-500 text-white text-sm rounded-full">Upload Avatar</span>
-              <input type="file" className="hidden" />
-            </label>
           </div>
-        </div>
-
-        <form className="text-center">
           <div className="mb-6">
             <label for="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
               Your name
@@ -187,11 +191,11 @@ const MyProfile = () => {
           <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center m-5">
             Edit
           </button>
-
-          <button type="submit" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center  " onClick={() => handleRemove(profile.id)}>
-            Delete
-          </button>
         </form>
+
+        <button type="submit" className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center  " onClick={() => handleRemove(profile.id)}>
+          Delete
+        </button>
       </Layout>
     );
   }
