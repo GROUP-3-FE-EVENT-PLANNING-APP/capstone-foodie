@@ -1,23 +1,41 @@
-import React from 'react';
+import React from "react";
+import { AiFillStar } from "react-icons/ai";
 
 function CardHomePage(props) {
   return (
     <>
       <>
-        <div className="container grow p-7   flex flex-col bg-white max-w-sm mx-auto rounded-md  text-black border-2 shadow-lg border-black ">
-          <div className="cursor-pointer h-full flex flex-col justify-between " onClick={props.onClickItem}>
-            <img className="max-w-full hover:scale-125 h-auto" width="500" height="750" src={props.image} alt={props.image} />
+        <div className="container grow p-7 flex flex-col bg-white max-w-sm mx-auto text-black">
+          <div
+            className="cursor-pointer h-full flex flex-col justify-between"
+            onClick={props.onClickItem}
+          >
+            <img
+              className="max-w-full hover:scale-125 h-auto rounded-md"
+              width="500"
+              height="750"
+              src={props.image}
+              alt={props.image}
+            />
             <div className="">
-              <p className="mt-2">{props.title}</p>
-              <div className="text-center text-lg font-semibold  ">
-                <p className="">{props.product}</p>
-                <p className="">{props.price}</p>
+              <h2 className="mt-2 font-bold">{props.restoname}</h2>
+              <div>
+                <p className="my-2">{props.location}</p>
+                <div className="flex flex-row">
+                  <div class="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
+                    {props.rating}
+                    <AiFillStar />
+                  </div>
+                  <div className="ml-2 my-3 text-gray-600">RATED</div>
+                </div>
               </div>
             </div>
           </div>
-          <button className="bg-blue-600 justify-center items-center h-16 lg:h-10 hover:bg-blue-700 rounded-md  flex flex-col lg:flex-row mt-2 ">
-            <p className="text-lg font-semibold mr-2">Halal</p>
-          </button>
+          <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-md">
+            <span className="text-sm font-medium py-1 px-2 text-white align-middle">
+              {props.category}
+            </span>
+          </div>
         </div>
       </>
     </>
