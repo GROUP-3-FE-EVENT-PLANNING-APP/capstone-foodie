@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
+import { comment } from "postcss";
 
 const Detail = (props) => {
   const [data, setData] = useState({});
@@ -17,7 +18,8 @@ const Detail = (props) => {
   const params = useParams();
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState("");
-  const [rating, setRating] = useState(5);
+  const [ratingInput, setRatingInput] = useState();
+  const { detail_id } = params;
 
   useEffect(() => {
     fetchData();
@@ -28,8 +30,7 @@ const Detail = (props) => {
     //console.log(params);
     const { detail_id } = params;
     axios
-      .get(`https://group3.altaproject.online/restaurants/2`)
-      // .get(`https://group3.altaproject.online/${detail_id}`)
+      .get(`https://group3.altaproject.online/restaurants/${detail_id}`)
       .then((response) => {
         // handle success
         const { data } = response;
@@ -45,7 +46,7 @@ const Detail = (props) => {
   function fetchComments(props) {
     const { detail_id } = params;
     axios
-      .get(`https://group3.altaproject.online/comments/2`)
+      .get(`https://group3.altaproject.online/comments/${detail_id}`)
       .then((response) => {
         // handle success
         const { data } = response;
@@ -54,11 +55,12 @@ const Detail = (props) => {
       .catch(function (error) {
         // handle error
         console.log(error);
-      })
-      .finally(() => setLoading(false));
+      });
+    //.finally(() => setLoading(false));
   }
 
-  const postComment = async (props) => {
+  const postComment = (props) => {
+    const { detail_id } = params;
     setLoading(true);
     const requestOptions = {
       method: "POST",
@@ -69,10 +71,13 @@ const Detail = (props) => {
 
       body: JSON.stringify({
         comment: commentInput,
-        rating: rating,
+        rating: Number(ratingInput),
       }),
     };
-    await fetch(`https://group3.altaproject.online/comments/2`, requestOptions)
+    fetch(
+      `https://group3.altaproject.online/comments/${detail_id}`,
+      requestOptions
+    )
       .then((response) => response.json())
       .then((data) => {
         fetchComments();
@@ -82,14 +87,14 @@ const Detail = (props) => {
         console.log(error);
       })
       .finally(() => {
-        //setLoading(false);
+        setLoading(false);
       });
   };
 
   const addToFavorite = () => {
     axios({
       method: "post",
-      url: "https://group3.altaproject.online/favourites/1",
+      url: `https://group3.altaproject.online/favourites/${detail_id}`,
       data: {
         id: 1,
       },
@@ -125,6 +130,7 @@ const Detail = (props) => {
             <div className="w-full col-span-2 row-span-2 rounded">
               <img
                 className="w-full h-full"
+                //src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
                 src={data.resto_images[0].resto_image_url}
                 alt=""
               />
@@ -133,7 +139,7 @@ const Detail = (props) => {
               <img
                 className="w-full h-full"
                 //src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
-                src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
+                src={data.resto_images[1].resto_image_url}
                 alt=""
               />
             </div>
@@ -141,7 +147,7 @@ const Detail = (props) => {
               <img
                 className="w-full h-full"
                 //src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
-                src="https://images.unsplash.com/photo-1532619031801-97b02fb2de1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+                src={data.resto_images[2].resto_image_url}
                 alt=""
               />
             </div>
@@ -187,7 +193,7 @@ const Detail = (props) => {
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
                 <ul className="text-sm pl-10">
-                  <li type="circle">{data.facilities[0].facility}</li>
+                  {/* <li type="circle">{data.facilities[0].facility}</li> */}
                 </ul>
               </div>
               <div>Kapasitas Meja : {data.table_quota}</div>
@@ -207,14 +213,14 @@ const Detail = (props) => {
           {/* comment */}
           <div>
             <CommentForms
-              onChange={(e) => setCommentInput(e.target.value)}
-              onChangeRating={(e) => setRating(e.target.newValue)}
-              //onChangeValue={(e) => setRating(e.target.value)}
+              onCommentChange={(e) => setCommentInput(e.target.value)}
+              onRatingChange={(e) => setRatingInput(e.target.value)}
+              // onChangeRating={(e) => setRating(e.target.value)}
               submitComment={() => postComment()}
             />
-            {comments.map((comments) => (
+            {comments.map((comments, index) => (
               <CommentList
-                key={comments.user_id}
+                key={index}
                 comment={comments.comment}
                 name={comments.name}
                 avatar={comments.avatar_url}
