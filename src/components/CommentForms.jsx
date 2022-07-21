@@ -11,21 +11,13 @@ const CommentForms = (props) => {
       <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
         <h2 className="pt-3 pb-2 text-lg font-medium">Comments and Rating</h2>
 
-        <div>
-          {" "}
-          <Rating
-            name="simple-controlled"
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-              console.log(newValue);
-            }}
-          />
-        </div>
         <div className="flex flex-wrap -mx-3 mb-6">
+          <div>
+            <Rating name="simple-controlled" onChange={props.onRatingChange} />
+          </div>
           <div className="w-full px-3 mb-2 mt-2">
             <textarea
-              onChange={props.onChange}
+              onChange={props.onCommentChange}
               className="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-500 focus:outline-none focus:bg-white"
               name="body"
               placeholder="Type Your Comment"
