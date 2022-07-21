@@ -1,8 +1,7 @@
 import React from 'react';
 import Layout from '../components/Layout';
-import ImageUpload from '../components/ImageUpload';
 import AddMap from '../components/AddMap';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 const AddResto = () => {
   const [objSubmit, setObjSubmit] = useState('');
   const [image, setMenu] = useState('');
+  const [images, setImages] = useState('');
+  const [berkas, setBerkas] = useState('');
 
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ const AddResto = () => {
     e.preventDefault();
     axios({
       method: 'post',
-      url: `https://group3.altaproject.online/events`,
+      url: `https://group3.altaproject.online/restaurants`,
       data: formData,
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -45,6 +46,7 @@ const AddResto = () => {
     let temp = { ...objSubmit };
     temp[key] = value;
     setObjSubmit(temp);
+    console.log(temp);
   };
 
   return (
@@ -53,9 +55,48 @@ const AddResto = () => {
         <form className="p-10 mt-8 w-full bg-white " onSubmit={(e) => createResto(e)}>
           <div className="shadow sm:rounded-md sm:overflow-hidden">
             <div className="px-4 py-5 bg-white">
-              <div className="mb-5 mt-5 flex flex-col">
-                <ImageUpload />
+              <div className="mb-5 mt-5 flex sm:flex-col md:flex-row">
+                <div className="mt-1 flex flex-col ml-5 items-start">
+                  <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
+                    <img src="" alt="" width="210" height="210" />
+                  </span>
+                  <input
+                    type="file"
+                    className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onChange={(e) => {
+                      setImages(URL.createObjectURL(e.target.files[0]));
+                      handleChange(e.target.files[0], 'resto_image_url');
+                    }}
+                  />
+                </div>
+                <div className="mt-1 ml-5 flex flex-col items-start">
+                  <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
+                    <img src="" alt="" width="210" height="210" />
+                  </span>
+                  <input
+                    type="file"
+                    className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onChange={(e) => {
+                      setImages(URL.createObjectURL(e.target.files[0]));
+                      handleChange(e.target.files[0], 'resto_image_url');
+                    }}
+                  />
+                </div>
+                <div className="mt-1 ml-5 flex flex-col items-start">
+                  <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
+                    <img src="" alt="" width="210" height="210" />
+                  </span>
+                  <input
+                    type="file"
+                    className="md:w-52 bg-white py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onChange={(e) => {
+                      setImages(URL.createObjectURL(e.target.files[0]));
+                      handleChange(e.target.files[0], 'resto_image_url');
+                    }}
+                  />
+                </div>
               </div>
+
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700">Name Resto</label>
@@ -63,7 +104,7 @@ const AddResto = () => {
                     <input
                       id="input-resto"
                       type="text"
-                      name="name-resto"
+                      name="resto_name"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                       placeholder="Name"
                       onChange={(e) => handleChange(e.target.value, 'resto_name')}
@@ -73,15 +114,15 @@ const AddResto = () => {
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">No Telephone</label>
+                  <label className="block text-sm font-medium text-gray-700">Booking</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
-                      name="phone"
-                      id="input-phone"
+                      name="booking_fee"
+                      id="booking_fee"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                       placeholder="No Telephone"
-                      onChange={(e) => handleChange(e.target.value, 'handphone')}
+                      onChange={(e) => handleChange(e.target.value, 'booking_fee')}
                     />
                   </div>
                 </div>
@@ -96,7 +137,7 @@ const AddResto = () => {
                       id="input-fasilitas"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Fasilitas"
-                      onChange={(e) => handleChange(e.target.value, 'facility ')}
+                      onChange={(e) => handleChange(e.target.value, 'facility')}
                     />
                   </div>
                 </div>
@@ -105,17 +146,17 @@ const AddResto = () => {
                 <div className="col-span-3 sm:col-span-2">
                   <label className="block text-sm font-medium text-gray-700">Category</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
-                    <select
+                    <input
                       type="text"
                       name="category"
-                      id="input-category"
+                      id="category"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Fasilitas"
-                      onChange={(e) => handleChange(e.target.value, 'category  ')}
+                      onChange={(e) => handleChange(e.target.value, 'category')}
                     >
-                      <option value="">Halal</option>
-                      <option value="">Non Halal</option>
-                    </select>
+                      {/* <option value="halal">Halal</option>
+                      <option value="non halal">Non Halal</option> */}
+                    </input>
                   </div>
                 </div>
               </div>
@@ -125,11 +166,11 @@ const AddResto = () => {
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
-                      name="kapasitas"
+                      name="table_quota"
                       id="input-kapasitas"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Kapasitas meja"
-                      onChange={(e) => handleChange(e.target.value, 'table_quota  ')}
+                      onChange={(e) => handleChange(e.target.value, 'table_quota')}
                     />
                   </div>
                 </div>
@@ -140,7 +181,7 @@ const AddResto = () => {
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
-                      name="Location"
+                      name="location"
                       id="input-kapasitas"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Location"
@@ -148,7 +189,7 @@ const AddResto = () => {
                     />
                   </div>
                 </div>
-                <AddMap />
+                {/* <AddMap /> */}
               </div>
 
               <div className="mb-5 mt-5">
@@ -164,7 +205,7 @@ const AddResto = () => {
                     className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onChange={(e) => {
                       setMenu(URL.createObjectURL(e.target.files[0]));
-                      handleChange(e.target.files[0], 'menu_image_url ');
+                      handleChange(e.target.files[0], 'menu_image_url');
                     }}
                   />
                 </div>
@@ -181,6 +222,10 @@ const AddResto = () => {
                   <input
                     type="file"
                     className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onChange={(e) => {
+                      setBerkas(URL.createObjectURL(e.target.files[0]));
+                      handleChange(e.target.files[0], 'file_image_url');
+                    }}
                   />
                 </div>
               </div>

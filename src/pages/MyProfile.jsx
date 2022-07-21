@@ -133,6 +133,7 @@ const MyProfile = () => {
               </div>
               <label className="cursor-pointer mt-6">
                 <input
+                  placeholder={profile.avatar_url}
                   type="file"
                   onChange={(e) => {
                     setAvatar(URL.createObjectURL(e.target.files[0]));
@@ -148,6 +149,7 @@ const MyProfile = () => {
               Your name
             </label>
             <input
+              placeholder={profile.name}
               type="text"
               id="name"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
@@ -159,6 +161,7 @@ const MyProfile = () => {
               Your email
             </label>
             <input
+              placeholder={profile.email}
               type="email"
               id="email"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
@@ -170,6 +173,7 @@ const MyProfile = () => {
               No telp
             </label>
             <input
+              placeholder={profile.handphone}
               type="text"
               id="notelp"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
@@ -181,6 +185,7 @@ const MyProfile = () => {
               Your password
             </label>
             <input
+              placeholder={profile.password}
               type="password"
               id="password"
               className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
