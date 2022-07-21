@@ -55,7 +55,16 @@ const AdminResto = () => {
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List Resto</h1>
           <div className="flex flex-col justify-center">
             {daftarresto.map((item, index) => (
-              <CardRestoadmin key={index} title={item.resto_name} location={item.location} rating={item.rating} status={item.status} category={item.category} onClickItem={() => navigate(`/admindetail/${item.id}`)} />
+              <CardRestoadmin
+                key={index}
+                image={item.resto_image_url}
+                title={item.resto_name}
+                location={item.location}
+                rating={item.rating}
+                status={item.status}
+                category={item.category}
+                onClickItem={() => navigate(`/admindetail/${item.id}`)}
+              />
             ))}
           </div>
         </div>
