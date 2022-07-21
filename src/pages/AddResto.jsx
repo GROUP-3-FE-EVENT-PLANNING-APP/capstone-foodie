@@ -1,13 +1,56 @@
-import React from "react";
-import Layout from "../components/Layout";
-import ImageUpload from "../components/ImageUpload";
-import AddMap from "../components/AddMap";
+import React from 'react';
+import Layout from '../components/Layout';
+import ImageUpload from '../components/ImageUpload';
+import AddMap from '../components/AddMap';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 const AddResto = () => {
+  const [objSubmit, setObjSubmit] = useState('');
+  const [image, setMenu] = useState('');
+
+  const navigate = useNavigate();
+
+  const createResto = (e) => {
+    const formData = new FormData();
+    for (const key in objSubmit) {
+      formData.append(key, objSubmit[key]);
+    }
+    e.preventDefault();
+    axios({
+      method: 'post',
+      url: `https://group3.altaproject.online/events`,
+      data: formData,
+      headers: {
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
+      },
+    })
+      .then((response) => {
+        // handle success
+        console.log(response);
+        swal('Good job!', 'Sukses Create Resto ', 'success');
+        navigate('/');
+      })
+
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+    // .finally(() => setLoading(false));
+  };
+
+  const handleChange = (value, key) => {
+    let temp = { ...objSubmit };
+    temp[key] = value;
+    setObjSubmit(temp);
+  };
+
   return (
     <Layout>
       <div className="flex justify-center p-10">
-        <form className="p-10 mt-8 w-full bg-white ">
+        <form className="p-10 mt-8 w-full bg-white " onSubmit={(e) => createResto(e)}>
           <div className="shadow sm:rounded-md sm:overflow-hidden">
             <div className="px-4 py-5 bg-white">
               <div className="mb-5 mt-5 flex flex-col">
@@ -15,9 +58,7 @@ const AddResto = () => {
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Name Resto
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Name Resto</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       id="input-resto"
@@ -25,15 +66,14 @@ const AddResto = () => {
                       name="name-resto"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                       placeholder="Name"
+                      onChange={(e) => handleChange(e.target.value, 'resto_name')}
                     />
                   </div>
                 </div>
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    No Telephone
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">No Telephone</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
@@ -41,15 +81,14 @@ const AddResto = () => {
                       id="input-phone"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
                       placeholder="No Telephone"
+                      onChange={(e) => handleChange(e.target.value, 'handphone')}
                     />
                   </div>
                 </div>
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Fasilitas
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Fasilitas</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
@@ -57,15 +96,14 @@ const AddResto = () => {
                       id="input-fasilitas"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Fasilitas"
+                      onChange={(e) => handleChange(e.target.value, 'facility ')}
                     />
                   </div>
                 </div>
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Category
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Category</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <select
                       type="text"
@@ -73,6 +111,7 @@ const AddResto = () => {
                       id="input-category"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Fasilitas"
+                      onChange={(e) => handleChange(e.target.value, 'category  ')}
                     >
                       <option value="">Halal</option>
                       <option value="">Non Halal</option>
@@ -82,9 +121,7 @@ const AddResto = () => {
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Kapasitas Meja
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Kapasitas Meja</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
@@ -92,15 +129,14 @@ const AddResto = () => {
                       id="input-kapasitas"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Kapasitas meja"
+                      onChange={(e) => handleChange(e.target.value, 'table_quota  ')}
                     />
                   </div>
                 </div>
               </div>
               <div className="mb-5 mt-5">
                 <div className="col-span-3 sm:col-span-2">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Location
-                  </label>
+                  <label className="block text-sm font-medium text-gray-700">Location</label>
                   <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                     <input
                       type="text"
@@ -108,6 +144,7 @@ const AddResto = () => {
                       id="input-kapasitas"
                       className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
                       placeholder="Location"
+                      onChange={(e) => handleChange(e.target.value, 'location')}
                     />
                   </div>
                 </div>
@@ -125,6 +162,10 @@ const AddResto = () => {
                   <input
                     type="file"
                     className="ml-5 bg-white py-2 px-3 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    onChange={(e) => {
+                      setMenu(URL.createObjectURL(e.target.files[0]));
+                      handleChange(e.target.files[0], 'menu_image_url ');
+                    }}
                   />
                 </div>
               </div>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Layout from "../components/Layout";
-import CardMyresto from "../components/CardMyresto";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import swal from "sweetalert";
+import React, { useState, useEffect } from 'react';
+import Layout from '../components/Layout';
+import CardMyresto from '../components/CardMyresto';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 const MyResto = () => {
   const [resto, setResto] = useState([]);
@@ -20,8 +20,8 @@ const MyResto = () => {
     axios
       .get(`https://group3.altaproject.online/myresto`, {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       })
       .then((response) => {
@@ -40,16 +40,16 @@ const MyResto = () => {
     axios
       .delete(`https://group3.altaproject.online/myresto/${id}`, {
         headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
         },
       })
       .then((response) => {
         const results = response.data;
         setRemove(results);
         swal({
-          title: "Good job!",
-          text: "SUKSES DELETE DATA",
+          title: 'Good job!',
+          text: 'SUKSES DELETE DATA',
         });
       })
       .catch(function (error) {
