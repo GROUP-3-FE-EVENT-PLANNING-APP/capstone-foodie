@@ -21,6 +21,8 @@ const Detail = (props) => {
   const [ratingInput, setRatingInput] = useState();
   const { detail_id } = params;
 
+  let ishalal = data.category == "halal";
+
   useEffect(() => {
     fetchData();
     fetchComments();
@@ -130,7 +132,6 @@ const Detail = (props) => {
             <div className="w-full col-span-2 row-span-2 rounded">
               <img
                 className="w-full h-full"
-                //src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
                 src={data.resto_images[0].resto_image_url}
                 alt=""
               />
@@ -138,7 +139,6 @@ const Detail = (props) => {
             <div>
               <img
                 className="w-full h-full"
-                //src="http://1.bp.blogspot.com/-5LszCXemuic/U5CwVQcaYcI/AAAAAAAAGEg/kfhTlsPjMhM/s1600/btscitos5.jpg"
                 src={data.resto_images[1].resto_image_url}
                 alt=""
               />
@@ -146,16 +146,24 @@ const Detail = (props) => {
             <div>
               <img
                 className="w-full h-full"
-                //src="https://media.istockphoto.com/photos/cute-girl-is-reading-book-sitting-in-nursery-library-picture-id1168630189?k=20&m=1168630189&s=612x612&w=0&h=oSnxfJvOe4aAvwSyOpPKFTa1u2qDpfOnKNYJdWFJ1_M="
                 src={data.resto_images[2].resto_image_url}
                 alt=""
               />
             </div>
           </div>
-          <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
-            <span className="font-medium py-1 px-2 text-green-500 align-middle">
-              Halal
-            </span>
+          <div hidden={!ishalal}>
+            <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
+              <span className="font-medium py-1 px-2 text-green-500 align-middle">
+                Halal
+              </span>
+            </div>
+          </div>
+          <div hidden={ishalal}>
+            <div className="flex justify-center box-border h-8 w-1/4 border-2 border-red-400">
+              <span className="font-medium py-1 px-2 text-red-500 align-middle">
+                Non Halal
+              </span>
+            </div>
           </div>
           <div className="flex justify-end">
             <div className="mx-5">
@@ -174,26 +182,25 @@ const Detail = (props) => {
             <div className="pt-5 text-2xl font-medium">{data.resto_name}</div>
             <div className="text-sm font-light">{data.location}</div>
             <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
-              {data.rating} <AiFillStar />
+              {data.rating.toFixed(1)} <AiFillStar />
             </p>
           </div>
           <div className="mb-5 lg:flex flex-row justify-center">
             {/* left side */}
             <div className="text-xl px-5 lg:pr-24 lg:pl-24 py-8 shadow-lg">
               Menu
-              <img
-                className="w-96 mb-5"
-                src={data.menu_image_url}
-                //src="https://b.zmtcdn.com/data/menus/805/7412805/ad0cc3792bdebc4ef970f38193ed5ede.jpg"
-                alt=""
-              />
+              <img className="w-96 mb-5" src={data.menu_image_url} alt="" />
             </div>
             {/* right side */}
             <div className="shadow-lg px-5 lg:pl-24 lg:pr-24 py-8">
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
-                <ul className="text-sm pl-10">
-                  {/* <li type="circle">{data.facilities[0].facility}</li> */}
+                <ul>
+                  {data.facilities.map((item) => (
+                    <li type="circle" className="text-sm">
+                      {item.facility}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div>Kapasitas Meja : {data.table_quota}</div>
@@ -215,7 +222,6 @@ const Detail = (props) => {
             <CommentForms
               onCommentChange={(e) => setCommentInput(e.target.value)}
               onRatingChange={(e) => setRatingInput(e.target.value)}
-              // onChangeRating={(e) => setRating(e.target.value)}
               submitComment={() => postComment()}
             />
             {comments.map((comments, index) => (
