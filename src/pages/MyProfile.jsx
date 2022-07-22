@@ -32,6 +32,7 @@ const MyProfile = () => {
         // handle success
         const results = response.data.data;
         setProfile(results);
+        console.log(results);
       })
       .catch(function (error) {
         // handle error
@@ -125,6 +126,7 @@ const MyProfile = () => {
   } else {
     return (
       <Layout>
+<<<<<<< HEAD
         <div className="justify-center p-20">
           <form
             className="text-center border border-gray-400"
@@ -157,6 +159,28 @@ const MyProfile = () => {
                 className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
               >
                 Your name
+=======
+        <form className="text-center" onSubmit={(e) => handleSubmit(e)}>
+          <div className="flex justify-center py-3 text-center mx-auto">
+            <div className="bg-gray-50 px-4 py-5 rounded-lg  text-center w-48">
+              <div className="mb-4">
+                <img
+                  className="w-auto mx-auto rounded-full object-cover object-center"
+                  src={profile.avatar_url}
+                  alt="Avatar Upload"
+                />
+              </div>
+              <label className="cursor-pointer mt-6">
+                <input
+                  placeholder={profile.avatar_url}
+                  type="file"
+                  onChange={(e) => {
+                    setAvatar(URL.createObjectURL(e.target.files[0]));
+                    handleChange(e.target.files[0], "avatar_url");
+                    //console.log(e.target.files[0]);
+                  }}
+                />
+>>>>>>> fe98b72858d7ff19db14ecf88fff476b8ba1471b
               </label>
               <input
                 type="text"
@@ -207,6 +231,7 @@ const MyProfile = () => {
                 onChange={(e) => handleChange(e.target.value, "password")}
               />
             </div>
+<<<<<<< HEAD
 
             <button
               type="submit"
@@ -226,6 +251,85 @@ const MyProfile = () => {
             </button>
           </div>
         </div>
+=======
+          </div>
+          <div className="mb-6">
+            <label
+              for="text"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Your name
+            </label>
+            <input
+              placeholder={profile.name}
+              type="text"
+              id="name"
+              className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+              onChange={(e) => handleChange(e.target.value, "name")}
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              for="email"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Your email
+            </label>
+            <input
+              placeholder={profile.email}
+              type="email"
+              id="email"
+              className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+              onChange={(e) => handleChange(e.target.value, "email")}
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              for="handphone"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              No telp
+            </label>
+            <input
+              placeholder={profile.handphone}
+              type="text"
+              id="handphone"
+              className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+              onChange={(e) => handleChange(e.target.value, "handphone")}
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              for="password"
+              className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            >
+              Your password
+            </label>
+            <input
+              placeholder="**********"
+              type="password"
+              id="password"
+              className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+              onChange={(e) => handleChange(e.target.value, "password")}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center m-5"
+          >
+            Edit
+          </button>
+        </form>
+
+        <button
+          type="submit"
+          className="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center  "
+          onClick={() => handleRemove(profile.id)}
+        >
+          Delete
+        </button>
+>>>>>>> fe98b72858d7ff19db14ecf88fff476b8ba1471b
       </Layout>
     );
   }

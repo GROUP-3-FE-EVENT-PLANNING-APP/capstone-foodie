@@ -57,6 +57,7 @@ const AdminResto = () => {
             {daftarresto.map((item, index) => (
               <CardRestoadmin
                 key={index}
+                image={item.resto_image_url}
                 title={item.resto_name}
                 location={item.location}
                 rating={item.rating}

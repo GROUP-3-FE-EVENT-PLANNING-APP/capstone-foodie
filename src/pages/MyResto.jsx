@@ -7,7 +7,7 @@ import axios from "axios";
 import swal from "sweetalert";
 
 const MyResto = () => {
-  const [resto, setResto] = useState([]);
+  const [resto, setResto] = useState({});
   const [remove, setRemove] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ const MyResto = () => {
       .then((response) => {
         const results = response.data.data;
         setResto(results);
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -70,23 +71,23 @@ const MyResto = () => {
   } else {
     return (
       <Layout>
+        {console.log(resto)}
         <div className="h-screen">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Resto</h1>
           <div className="flex flex-col justify-center">
-            {resto.map((item) => (
-              <CardMyresto
-                key={item.id}
-                restoname={item.resto_name}
-                rating={item.rating}
-                image={item.resto_image_url}
-                status={item.status}
-                location={item.location}
-                category={item.category}
-                onClick={() => handleRemove(item.id)}
-                onClickEdit={() => navigate.push(`edit/${item.id}`)}
-              />
-            ))}
+            <CardMyresto
+              key={resto.id}
+              restoname={resto.resto_name}
+              rating={resto.rating}
+              image={resto.resto_image_url}
+              status={resto.status}
+              location={resto.location}
+              category={resto.category}
+              onClick={() => handleRemove(resto.id)}
+              onClickEdit={() => navigate.push(`edit/${resto.id}`)}
+            />
           </div>
+
           <div className="flex flex-col items-center my-48">
             <p className="text-2xl">Kamu tidak memiliki resto</p>
             <button
