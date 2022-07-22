@@ -30,7 +30,7 @@ function Rot() {
         <Route path="/addresto" element={<AddResto />} />
         <Route path="/detail/:detail_id" element={<Detail />} />
         <Route path="/admindetail/:admindetail_id" element={<DetailAdmin />} />
-        <Route path="/editresto" element={<EditResto />} />
+        <Route path="/editresto/:editresto_id" element={<EditResto />} />
         <Route
           path="*"
           element={
