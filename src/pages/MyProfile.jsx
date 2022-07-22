@@ -138,6 +138,7 @@ const MyProfile = () => {
               </div>
               <label className="cursor-pointer mt-6">
                 <input
+                  placeholder={profile.avatar_url}
                   type="file"
                   onChange={(e) => {
                     setAvatar(URL.createObjectURL(e.target.files[0]));

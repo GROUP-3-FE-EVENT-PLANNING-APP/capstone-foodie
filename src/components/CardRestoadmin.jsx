@@ -1,12 +1,12 @@
 import React from 'react';
 import { AiFillStar } from 'react-icons/ai';
 
-const CardRestoadmin = ({ title, location, rating, status, onClick, category, onClickItem }) => {
+const CardRestoadmin = ({ title, location, rating, status, onClick, category, onClickItem, image }) => {
   return (
     <div className="flex justify-center mx-10 mb-5">
       <div className="container grow flex flex-col bg-white max-w-sm mx-auto rounded-md  text-black border-1 shadow-lg mb-3 mt-3">
         <div className="cursor-pointer h-full flex flex-col justify-between ">
-          <img className="max-w-full  h-auto" width="500" height="750" src="https://th.bing.com/th/id/OIP.VdB7tzRUB_rI9Al-tlPYKwHaE8?w=224&h=180&c=7&r=0&o=5&pid=1.7" alt="Rumah Makan Padang" />
+          <img className="max-w-full  h-auto" width="500" height="750" src={image} alt="Rumah Makan Padang" />
           <div className="px-3 py-2">
             <div className="flex justify-center box-border h-8 w-full my-2 border-2 border-green-400">
               <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">{category}</span>
