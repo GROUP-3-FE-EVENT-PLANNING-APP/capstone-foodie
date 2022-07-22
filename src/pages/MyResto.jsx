@@ -7,7 +7,7 @@ import axios from 'axios';
 import swal from 'sweetalert';
 
 const MyResto = () => {
-  const [resto, setResto] = useState([]);
+  const [resto, setResto] = useState({});
   const [remove, setRemove] = useState([]);
   const [loading, setLoading] = useState(true);
   const [verifikasi, setVerifikasi] = useState('');
@@ -93,6 +93,7 @@ const MyResto = () => {
               onClickEdit={() => navigate(`/editresto/${resto.id}`)}
             />
           </div>
+
           <div className="flex flex-col items-center my-48">
             {verifikasi === 'unverification' ? (
               <div>
