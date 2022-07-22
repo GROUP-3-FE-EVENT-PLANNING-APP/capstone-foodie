@@ -1,8 +1,8 @@
-import React from 'react';
-import Layout from '../components/Layout';
-import CardMyfavorite from '../components/CardMyfavorite';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import Layout from "../components/Layout";
+import CardMyfavorite from "../components/CardMyfavorite";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const MyFavorite = () => {
   const [favourites, setFavourites] = useState([]);
@@ -13,11 +13,11 @@ const MyFavorite = () => {
 
   const getFavorite = () => {
     axios({
-      method: 'get',
-      url: 'https://group3.altaproject.online/favourites',
+      method: "get",
+      url: "https://group3.altaproject.online/favourites",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => {
@@ -35,7 +35,14 @@ const MyFavorite = () => {
         <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Favorite</h1>
         <div className="flex flex-col justify-center">
           {favourites.map((item, index) => (
-            <CardMyfavorite key={index} title={item.resto_name} location={item.location} rating={item.rating} category={item.category} />
+            <CardMyfavorite
+              key={index}
+              image={item.resto_image_url}
+              title={item.resto_name}
+              location={item.location}
+              rating={item.rating}
+              category={item.category}
+            />
           ))}
         </div>
       </div>

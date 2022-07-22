@@ -2,6 +2,7 @@ import React from "react";
 import { AiFillStar } from "react-icons/ai";
 
 function CardHomePage(props) {
+  const ishalal = props.category == "halal";
   return (
     <>
       <>
@@ -11,7 +12,7 @@ function CardHomePage(props) {
             onClick={props.onClickItem}
           >
             <img
-              className="max-w-full hover:scale-125 h-auto rounded-md"
+              className="object-cover max-w-full transition duration-0 hover:duration-150 hover:scale-125 h-auto rounded-md"
               width="500"
               height="750"
               src={props.image}
@@ -23,7 +24,7 @@ function CardHomePage(props) {
                 <p className="my-2">{props.location}</p>
                 <div className="flex flex-row">
                   <div class="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
-                    {props.rating}
+                    {props.rating.toFixed(1)}
                     <AiFillStar />
                   </div>
                   <div className="ml-2 my-3 text-gray-600">RATED</div>
@@ -31,10 +32,19 @@ function CardHomePage(props) {
               </div>
             </div>
           </div>
-          <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-md">
-            <span className="text-sm font-medium py-1 px-2 text-white align-middle">
-              {props.category}
-            </span>
+          <div hidden={!ishalal}>
+            <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-md">
+              <span className="text-sm font-medium py-1 px-2 text-white align-middle">
+                {props.category}
+              </span>
+            </div>
+          </div>
+          <div hidden={ishalal}>
+            <div className="flex justify-center h-8 w-full my-2 bg-red-500 rounded-md">
+              <span className="text-sm font-medium py-1 px-2 text-white align-middle">
+                {props.category}
+              </span>
+            </div>{" "}
           </div>
         </div>
       </>

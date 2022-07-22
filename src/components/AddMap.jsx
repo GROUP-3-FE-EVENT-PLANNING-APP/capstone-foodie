@@ -1,7 +1,7 @@
 import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { useState, useRef, useMemo, useCallback } from "react";
+import { useState, useRef, useMemo, useCallback, useEffect } from "react";
 
 delete L.Icon.Default.prototype._getIconUrl;
 
@@ -11,7 +11,7 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
 });
 
-function AddMap() {
+const AddMap = (props) => {
   const center = {
     lat: -6.169,
     lng: 106.8209,
@@ -27,6 +27,7 @@ function AddMap() {
     () => ({
       dragend() {
         const marker = markerRef.current;
+
         if (marker != null) {
           setPosition(marker.getLatLng());
         }
@@ -38,48 +39,28 @@ function AddMap() {
     setDraggable((d) => !d);
   }, []);
 
-  return (
-    console.log(position),
-    (
-      <div className="App">
-        <MapContainer center={position} zoom={14} scrollWheelZoom={false}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker
-            draggable={draggable}
-            eventHandlers={eventHandlers}
-            position={position}
-            ref={markerRef}
-          >
-            <Popup minWidth={90}>
-              My Restaurant Location
-              {/* <span onClick={toggleDraggable}>
-                {draggable
-                  ? "Marker is draggable"
-                  : "Click here to make marker draggable"}
-              </span> */}
-            </Popup>
-          </Marker>
-        </MapContainer>
+  useEffect(() => {
+    props.onChangeLocation(position.lat, position.lng);
+  }, [position]);
 
-        <div className="text-left mt-3">
-          {" "}
-          <input
-            disabled
-            className="border-solid border-2 border-gray-400"
-            placeholder={position.lat}
-          ></input>{" "}
-          <input
-            disabled
-            className="border-solid border-2 border-gray-400"
-            placeholder={position.lng}
-          ></input>{" "}
-        </div>
-      </div>
-    )
+  return (
+    <div className="App">
+      <MapContainer center={position} zoom={14} scrollWheelZoom={false}>
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker
+          draggable={draggable}
+          eventHandlers={eventHandlers}
+          position={position}
+          ref={markerRef}
+        >
+          <Popup minWidth={90}>My Restaurant Location</Popup>
+        </Marker>
+      </MapContainer>
+    </div>
   );
-}
+};
 
 export default AddMap;
