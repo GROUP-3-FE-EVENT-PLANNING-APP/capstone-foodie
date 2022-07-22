@@ -11,6 +11,9 @@ const EditResto = () => {
   const [objSubmit, setObjSubmit] = useState('');
   const [image, setMenu] = useState('');
   const [images, setImages] = useState('');
+  const [gambar, setGambar] = useState('');
+  const [lukisan, setLukisan] = useState('');
+
   const [berkas, setBerkas] = useState('');
 
   const navigate = useNavigate();
@@ -22,7 +25,7 @@ const EditResto = () => {
     }
     e.preventDefault();
     axios({
-      method: 'post',
+      method: 'put',
       url: `https://group3.altaproject.online/restaurants`,
       data: formData,
       headers: {
@@ -32,7 +35,7 @@ const EditResto = () => {
       .then((response) => {
         // handle success
         console.log(response);
-        swal('Good job!', 'Sukses Create Resto ', 'success');
+        swal('Good job!', 'Sukses Edit Resto ', 'success');
         navigate('/');
       })
 
@@ -78,7 +81,7 @@ const EditResto = () => {
                     type="file"
                     className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onChange={(e) => {
-                      setImages(URL.createObjectURL(e.target.files[0]));
+                      setGambar(URL.createObjectURL(e.target.files[0]));
                       handleChange(e.target.files[0], 'resto_image_url');
                     }}
                   />
@@ -91,7 +94,7 @@ const EditResto = () => {
                     type="file"
                     className="md:w-52 bg-white py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onChange={(e) => {
-                      setImages(URL.createObjectURL(e.target.files[0]));
+                      setLukisan(URL.createObjectURL(e.target.files[0]));
                       handleChange(e.target.files[0], 'resto_image_url');
                     }}
                   />
