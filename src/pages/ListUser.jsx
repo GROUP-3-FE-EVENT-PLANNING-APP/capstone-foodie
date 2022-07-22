@@ -1,9 +1,9 @@
-import React from 'react';
-import CardUser from '../components/CardUser';
-import Layout from '../components/Layout';
-import { useState, useEffect } from 'react';
-import swal from 'sweetalert';
-import axios from 'axios';
+import React from "react";
+import CardUser from "../components/CardUser";
+import Layout from "../components/Layout";
+import { useState, useEffect } from "react";
+import swal from "sweetalert";
+import axios from "axios";
 
 const ListUser = () => {
   const [namauser, setNamaUser] = useState();
@@ -15,12 +15,12 @@ const ListUser = () => {
 
   const getUser = () => {
     axios({
-      method: 'get',
+      method: "get",
       url: `https://group3.altaproject.online/admins/users
       `,
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => {
@@ -31,8 +31,8 @@ const ListUser = () => {
       .catch(function (error) {
         // handle error
         swal({
-          title: 'Good job!',
-          text: 'EROOR',
+          title: "Good job!",
+          text: "EROOR",
         });
       })
       .finally(() => {
@@ -51,10 +51,15 @@ const ListUser = () => {
       <Layout>
         <div className="h-full w-full">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List User</h1>
-          <div className="grid lg:grid-cols-3">
-            <div className="flex flex-col justify-center">
+          <div>
+            <div className="grid grid-cols-3 mr-8 gap-4">
               {namauser.map((item, index) => (
-                <CardUser nama={item.name} email={item.email} handphone={item.handphone} image={item.avatar_url} />
+                <CardUser
+                  nama={item.name}
+                  email={item.email}
+                  handphone={item.handphone}
+                  image={item.avatar_url}
+                />
               ))}
             </div>
           </div>

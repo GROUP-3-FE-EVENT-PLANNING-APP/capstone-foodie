@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "../components/Layout";
-import ImageUpload from "../components/ImageUpload";
 import AddMap from "../components/AddMap";
 
 const AddResto = () => {
