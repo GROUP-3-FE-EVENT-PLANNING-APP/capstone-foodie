@@ -47,37 +47,6 @@ const EditResto = () => {
       .finally(() => setLoading(false));
   };
 
-  const addImage1 = () => {
-    setLoading(true);
-    const formData = new FormData();
-    formData.append("resto_image_url", image);
-    axios({
-      method: "post",
-      url: `https://group3.altaproject.online/restaurants/upload`,
-      data: formData,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((response) => {
-        // handle success
-        console.log(response);
-        swal("Good job!", "Sukses Edit Resto ", "success");
-        navigate("/");
-      })
-
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      })
-      .finally(() => setLoading(false));
-  };
-
-  const handleSubmit = () => {
-    addImage1();
-    editsResto();
-  };
-
   const setLocation = async (lat, lng) => {
     let temp = { ...objSubmit, latitude: lat, longitude: lng };
     setObjSubmit(temp);
@@ -105,52 +74,10 @@ const EditResto = () => {
         <div className="flex justify-center p-10">
           <form
             className="p-10 mt-8 w-full bg-white "
-            onSubmit={() => handleSubmit()}
+            onSubmit={() => editsResto()}
           >
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white">
-                <div className="mb-5 mt-5 flex sm:flex-col md:flex-row">
-                  <div className="mt-1 flex flex-col ml-5 items-start">
-                    <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
-                    </span>
-                    <input
-                      type="file"
-                      className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onChange={(e) => {
-                        setImages(URL.createObjectURL(e.target.files[0]));
-                        handleChange(e.target.files[0], "resto_image_url");
-                      }}
-                    />
-                  </div>
-                  <div className="mt-1 ml-5 flex flex-col items-start">
-                    <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
-                    </span>
-                    <input
-                      type="file"
-                      className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onChange={(e) => {
-                        setGambar(URL.createObjectURL(e.target.files[0]));
-                        handleChange(e.target.files[0], "resto_image_url");
-                      }}
-                    />
-                  </div>
-                  <div className="mt-1 ml-5 flex flex-col items-start">
-                    <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
-                    </span>
-                    <input
-                      type="file"
-                      className="md:w-52 bg-white py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                      onChange={(e) => {
-                        setLukisan(URL.createObjectURL(e.target.files[0]));
-                        handleChange(e.target.files[0], "resto_image_url");
-                      }}
-                    />
-                  </div>
-                </div>
-
                 <div className="mb-5 mt-5">
                   <div className="col-span-3 sm:col-span-2">
                     <label className="block text-sm font-medium text-gray-700">

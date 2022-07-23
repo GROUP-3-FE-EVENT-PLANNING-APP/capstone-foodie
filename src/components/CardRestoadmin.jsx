@@ -3,6 +3,7 @@ import { AiFillStar } from "react-icons/ai";
 
 const CardRestoadmin = ({
   title,
+  image,
   location,
   rating,
   status,
@@ -21,9 +22,14 @@ const CardRestoadmin = ({
             className="max-w-full  h-auto"
             width="500"
             height="750"
-            src="https://th.bing.com/th/id/OIP.VdB7tzRUB_rI9Al-tlPYKwHaE8?w=224&h=180&c=7&r=0&o=5&pid=1.7"
+            src={
+              image
+                ? image
+                : "https://via.placeholder.com/500x750?text=No+Image"
+            }
             alt="Rumah Makan Padang"
           />
+          {console.log(image)}
           <div className="px-3 py-2">
             <div className="flex justify-center box-border h-8 w-full my-2 border-2 border-green-400">
               <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">

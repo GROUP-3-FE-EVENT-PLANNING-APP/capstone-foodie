@@ -132,7 +132,7 @@ const MyProfile = () => {
             onSubmit={(e) => handleSubmit(e)}
           >
             <div className="flex justify-center py-3 text-center mx-auto">
-              <div className="bg-gray-50 px-4 py-5 rounded-lg  text-center w-48">
+              <div className="px-4 py-5 rounded-lg  text-center w-48">
                 <div className="mb-4">
                   <img
                     className="w-auto mx-auto rounded-full object-cover object-center"
@@ -160,9 +160,10 @@ const MyProfile = () => {
                 Your name
               </label>
               <input
+                placeholder={profile.name}
                 type="text"
                 id="name"
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+                className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
                 onChange={(e) => handleChange(e.target.value, "name")}
               />
             </div>
@@ -174,9 +175,10 @@ const MyProfile = () => {
                 Your email
               </label>
               <input
+                placeholder={profile.email}
                 type="email"
                 id="email"
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+                className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
                 onChange={(e) => handleChange(e.target.value, "email")}
               />
             </div>
@@ -188,10 +190,11 @@ const MyProfile = () => {
                 No telp
               </label>
               <input
+                placeholder={profile.handphone}
                 type="text"
                 id="notelp"
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
-                onChange={(e) => handleChange(e.target.value, "notelp")}
+                className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+                onChange={(e) => handleChange(e.target.value, "handphone")}
               />
             </div>
             <div className="mb-6">
@@ -202,9 +205,10 @@ const MyProfile = () => {
                 Your password
               </label>
               <input
+                placeholder="********"
                 type="password"
                 id="password"
-                className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
+                className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
                 onChange={(e) => handleChange(e.target.value, "password")}
               />
             </div>
