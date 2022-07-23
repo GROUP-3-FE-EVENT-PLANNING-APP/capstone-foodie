@@ -8,7 +8,6 @@ const CardMyfavorite = ({
   location,
   rating,
   category,
-  image,
 }) => {
   return (
     <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center">

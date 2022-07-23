@@ -98,7 +98,7 @@ const Detail = (props) => {
       method: "post",
       url: `https://group3.altaproject.online/favourites/${detail_id}`,
       data: {
-        id: 1,
+        id: { detail_id },
       },
       headers: {
         "Content-Type": "application/json",
