@@ -27,9 +27,8 @@ function Copyright(props) {
       {"Copyright © "}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </Link>
       {new Date().getFullYear()}
-      {"."}
     </Typography>
   );
 }
@@ -57,6 +56,7 @@ const Login = () => {
       })
       .catch(function (error) {
         console.log(error);
+        swal("Error", "Email or password incorrect", "error");
       });
   };
 

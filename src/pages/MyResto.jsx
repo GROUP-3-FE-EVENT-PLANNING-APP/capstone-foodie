@@ -1,17 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import Layout from '../components/Layout';
-import CardMyresto from '../components/CardMyresto';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import swal from 'sweetalert';
+import React, { useState, useEffect } from "react";
+import Layout from "../components/Layout";
+import CardMyresto from "../components/CardMyresto";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import swal from "sweetalert";
 
 const MyResto = () => {
   const [resto, setResto] = useState({});
   const [remove, setRemove] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [verifikasi, setVerifikasi] = useState('');
-
+  const [verifikasi, setVerifikasi] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,8 +21,8 @@ const MyResto = () => {
     axios
       .get(`https://group3.altaproject.online/myresto`, {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
       .then((response) => {
@@ -44,8 +43,8 @@ const MyResto = () => {
     axios
       .delete(`https://group3.altaproject.online/restaurants`, {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
       .then((response) => {
@@ -54,8 +53,8 @@ const MyResto = () => {
         setRemove(results);
         console.log(results);
         swal({
-          title: 'Good job!',
-          text: 'SUKSES DELETE DATA',
+          title: "Good job!",
+          text: "SUKSES DELETE DATA",
         });
       })
       .catch(function (error) {
@@ -64,7 +63,7 @@ const MyResto = () => {
       .finally(() => {
         // setLoading(false);
         getmyResto();
-        navigate('/', { replace: true });
+        navigate("/", { replace: true });
       });
   };
 
@@ -77,25 +76,24 @@ const MyResto = () => {
   } else {
     return (
       <Layout>
-        {console.log(resto)}
         <div className="h-full">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Resto</h1>
-          <div className="flex flex-col justify-center">
-            <CardMyresto
-              key={resto.id}
-              restoname={resto.resto_name}
-              rating={resto.rating}
-              image={resto.resto_image_url}
-              status={resto.status}
-              location={resto.location}
-              category={resto.category}
-              onClick={() => handleRemove(resto.id)}
-              onClickEdit={() => navigate(`/editresto/${resto.id}`)}
-            />
-          </div>
-
           <div className="flex flex-col items-center my-48">
-            {verifikasi === 'unverification' ? (
+            {["unverification", "verification"].includes(verifikasi) ? (
+              <div className="flex flex-col justify-center">
+                <CardMyresto
+                  key={resto.id}
+                  restoname={resto.resto_name}
+                  rating={resto.rating}
+                  image={resto.resto_image_url}
+                  status={resto.status}
+                  location={resto.location}
+                  category={resto.category}
+                  onClick={() => handleRemove(resto.id)}
+                  onClickEdit={() => navigate(`/editresto/${resto.id}`)}
+                />
+              </div>
+            ) : (
               <div>
                 <p className="text-2xl">Kamu tidak memiliki resto</p>
                 <button
@@ -105,7 +103,7 @@ const MyResto = () => {
                   <Link to="/addresto">Buat Resto</Link>
                 </button>
               </div>
-            ) : null}
+            )}
           </div>
         </div>
       </Layout>
