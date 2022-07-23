@@ -1,6 +1,7 @@
 import React from "react";
 import { CgFormatSlash } from "react-icons/cg";
 import User from "./User";
+import Admin from "./Admin";
 import { Link } from "react-router-dom";
 import Logonav from "../assets/images/foodie.png";
 
@@ -57,6 +58,7 @@ const Header = () => {
         </div>
         <div hidden={loggedout}>
           <User></User>
+          <Admin></Admin>
         </div>
       </div>
     </nav>
