@@ -19,13 +19,13 @@ const CardRestoadmin = ({
           onClick={onClickItem}
         >
           <img
-            className="max-w-full  h-auto"
+            className="max-w-full  h-full"
             width="500"
-            height="750"
+            height="350"
             src={
               image
                 ? image
-                : "https://via.placeholder.com/500x750?text=No+Image"
+                : "https://via.placeholder.com/500x350?text=No+Image"
             }
             alt="Rumah Makan Padang"
           />
@@ -45,6 +45,11 @@ const CardRestoadmin = ({
             </div>
           </div>
           <div className="flex justify-center h-8 w-full bg-[#D9613C]">
+            <span className="text-sm font-medium py-1 px-2 text-white align-middle">
+              {status}
+            </span>
+          </div>
+          <div className="flex justify-center h-8 w-full bg-green-500">
             <span className="text-sm font-medium py-1 px-2 text-white align-middle">
               {status}
             </span>

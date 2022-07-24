@@ -71,8 +71,11 @@ const AddResto = () => {
     return (
       <Layout>
         <div className="justify-center p-10">
+          <div className="text-center text-2xl font-bold md:ml-12 pt-5">
+            Create Resto
+          </div>
           <form
-            className="p-10 mt-8 w-full bg-white "
+            className="p-10 w-full bg-white "
             onSubmit={(e) => createResto(e)}
           >
             <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -87,8 +90,8 @@ const AddResto = () => {
                         id="input-resto"
                         type="text"
                         name="resto_name"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="Name"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300"
+                        placeholder=" Name"
                         onChange={(e) =>
                           handleChange(e.target.value, "resto_name")
                         }
@@ -106,8 +109,8 @@ const AddResto = () => {
                         type="text"
                         name="booking_fee"
                         id="booking_fee"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="Harga Booking"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300"
+                        placeholder=" Harga Booking"
                         onChange={(e) =>
                           handleChange(e.target.value, "booking_fee")
                         }
@@ -125,8 +128,8 @@ const AddResto = () => {
                         type="text"
                         name="fasilitas"
                         id="input-fasilitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Fasilitas"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Fasilitas"
                         onChange={(e) =>
                           handleChange(e.target.value, "facility")
                         }
@@ -145,8 +148,8 @@ const AddResto = () => {
                         type="text"
                         name="category"
                         id="category"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Fasilitas"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Category"
                         onChange={(e) =>
                           handleChange(e.target.value, "category")
                         }
@@ -167,8 +170,8 @@ const AddResto = () => {
                         type="number"
                         name="table_quota"
                         id="input-kapasitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Kapasitas meja"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Kapasitas meja"
                         onChange={(e) =>
                           handleChange(e.target.value, "table_quota")
                         }
@@ -186,8 +189,8 @@ const AddResto = () => {
                         type="text"
                         name="location"
                         id="input-kapasitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Location"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Location"
                         onChange={(e) =>
                           handleChange(e.target.value, "location")
                         }
