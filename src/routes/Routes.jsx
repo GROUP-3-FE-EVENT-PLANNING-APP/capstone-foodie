@@ -27,7 +27,7 @@ function Rot() {
           <Route path="/myprofile" element={<MyProfile />} />
           <Route path="/myresto" element={<MyResto />} />
           <Route path="/myfavorite" element={<MyFavorite />} />
-          <Route path="/booking" element={<Booking />} />
+          <Route path="/booking/:detail_id" element={<Booking />} />
           <Route path="/adminresto" element={<AdminResto />} />
           <Route path="/listuser" element={<ListUser />} />
           <Route path="/addresto" element={<AddResto />} />
