@@ -9,6 +9,7 @@ const CardMyfavorite = ({
   rating,
   category,
 }) => {
+  const ishalal = category == "halal";
   return (
     <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center">
       <div className="h-52 lg:h-auto lg:w-72 flex-none lg:rounded-t-none lg:rounded-l text-center overflow-hidden border-y-2 border-l-2 border-gray-400">
@@ -21,10 +22,19 @@ const CardMyfavorite = ({
           <p class="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
             {rating.toFixed(1)} <AiFillStar />
           </p>
-          <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-green-400">
-            <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
-              {category}
-            </span>
+          <div hidden={!ishalal}>
+            <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-green-400">
+              <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
+                {category}
+              </span>
+            </div>
+          </div>
+          <div hidden={ishalal}>
+            <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-red-400">
+              <span className="text-sm font-medium py-1 px-2 text-red-500 align-middle">
+                {category}
+              </span>
+            </div>
           </div>
           <button
             type="submit"
