@@ -25,8 +25,8 @@ function Copyright(props) {
       {...props}
     >
       {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://wisata-foodie.vercel.app/">
+        {"Wisata Foodie "}
       </Link>
       {new Date().getFullYear()}
     </Typography>
@@ -147,6 +147,7 @@ const Register = () => {
                 required
                 fullWidth
                 id="text"
+                type="tel"
                 label="Phone Number"
                 name="phone"
                 autoComplete="phone"
