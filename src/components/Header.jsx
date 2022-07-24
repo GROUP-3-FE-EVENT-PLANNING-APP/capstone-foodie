@@ -57,8 +57,8 @@ const Header = (props) => {
             </div>
           </div>
         </div>
-        <div className="flex" hidden={loggedout}>
-          {theme === 'dark' ? <FaSun className="w-8 h-8 text-white" onClick={() => handleThemeChange('light')} /> : <FaMoon className="w-8 h-8 text-white" onClick={() => handleThemeChange('dark')} />}
+        <div className="flex justify-center items-center" hidden={loggedout}>
+          {theme === 'dark' ? <FaSun className="w-7  h-7 cursor-pointer text-white" onClick={() => handleThemeChange('light')} /> : <FaMoon className="w-7  h-7 cursor-pointer text-white" onClick={() => handleThemeChange('dark')} />}
           <User></User>
           <Admin></Admin>
         </div>
