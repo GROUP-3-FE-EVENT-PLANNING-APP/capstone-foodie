@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import CardMyresto from "../components/CardMyresto";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -76,7 +77,7 @@ const MyResto = () => {
   } else {
     return (
       <Layout>
-        <div className="h-full">
+        <div className="h-full dark:text-white">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Resto</h1>
           <div className="flex flex-col items-center my-48">
             {["unverification", "verified"].includes(verifikasi) ? (
@@ -94,7 +95,7 @@ const MyResto = () => {
                 />
               </div>
             ) : (
-              <div>
+              <div className="dark:text-white">
                 <p className="text-2xl">Kamu tidak memiliki resto</p>
                 <div className="text-center">
                   <button

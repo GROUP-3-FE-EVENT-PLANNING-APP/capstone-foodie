@@ -188,7 +188,7 @@ const Detail = (props) => {
               Book now
             </Button>
           </div>
-          <div className="px-10">
+          <div className="px-10 dark:text-white">
             <div className="pt-5 text-2xl font-medium">{data.resto_name}</div>
             <div className="text-sm font-light">{data.location}</div>
             <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
@@ -202,7 +202,7 @@ const Detail = (props) => {
               <img className="w-96 mb-5" src={data.menu_image_url} alt="" />
             </div>
             {/* right side */}
-            <div className="shadow-lg px-5 lg:pl-24 lg:pr-24 py-8">
+            <div className="shadow-lg px-5 lg:pl-24 lg:pr-24 py-8 dark:text-white">
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
                 <ul>

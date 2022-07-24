@@ -3,7 +3,7 @@ import React from "react";
 const CommentList = (props) => {
   return (
     <div>
-      <div className=" mx-auto px-10 pb-10 item-start">
+      <div className=" mx-auto px-10 pb-10 item-start dark:text-white">
         <div className="space-y-4">
           <div className="flex">
             <div className="flex-shrink-0 mr-3">
