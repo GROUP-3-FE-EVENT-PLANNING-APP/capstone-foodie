@@ -71,7 +71,7 @@ const MyFavorite = () => {
   } else {
     return (
       <Layout>
-        <div className="h-screen">
+        <div className="h-screen dark:text-white">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Favorite</h1>
           <div className="grid grid-cols-2 mx-5 gap-4">
             {favourites.map((item, index) => (
