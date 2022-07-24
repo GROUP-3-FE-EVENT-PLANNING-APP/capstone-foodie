@@ -1,10 +1,10 @@
-import React from "react";
-import Layout from "../components/Layout";
-import CardRestoadmin from "../components/CardRestoadmin";
-import { useState, useEffect } from "react";
-import swal from "sweetalert";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import Layout from '../components/Layout';
+import CardRestoadmin from '../components/CardRestoadmin';
+import { useState, useEffect } from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AdminResto = () => {
   const [daftarresto, setDaftarResto] = useState();
@@ -15,14 +15,14 @@ const AdminResto = () => {
     getAdminRestaurant();
   }, []);
 
-  const getAdminRestaurant = () => {
+  const getAdminRestaurant = (e) => {
     axios({
-      method: "get",
+      method: 'get',
       url: `https://group3.altaproject.online/admins/restaurants
       `,
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     })
       .then((response) => {
@@ -33,8 +33,8 @@ const AdminResto = () => {
       .catch(function (error) {
         // handle error
         swal({
-          title: "Good job!",
-          text: "EROOR",
+          title: 'Good job!',
+          text: 'EROOR',
         });
       })
       .finally(() => {
@@ -53,7 +53,7 @@ const AdminResto = () => {
       <Layout>
         <div className="h-full">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List Resto</h1>
-          <div className="grid grid-cols-3 mr-8 gap-4">
+          <div className="flex flex-col justify-center">
             {daftarresto.map((item, index) => (
               <CardRestoadmin
                 key={index}
