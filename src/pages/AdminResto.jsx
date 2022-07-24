@@ -15,7 +15,7 @@ const AdminResto = () => {
     getAdminRestaurant();
   }, []);
 
-  const getAdminRestaurant = () => {
+  const getAdminRestaurant = (e) => {
     axios({
       method: "get",
       url: `https://group3.altaproject.online/admins/restaurants

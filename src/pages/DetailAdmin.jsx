@@ -55,7 +55,7 @@ const Detail = () => {
 
     axios({
       method: "post",
-      url: `https://group3.altaproject.online/admins/verif/${admindetail_id}`,
+      url: `https://group3.altaproject.online/admins/verif/5`,
       data: {
         id: admindetail_id,
       },
@@ -111,11 +111,20 @@ const Detail = () => {
               />
             </div>
           </div>
-          <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
-            <span className="font-medium py-1 px-2 text-green-500 align-middle">
-              {data.category}
-            </span>
-          </div>
+          {data.category == "halal" ? (
+            <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
+              <span className="font-medium py-1 px-2 text-green-500 align-middle">
+                {data.category}
+              </span>
+            </div>
+          ) : (
+            <div className="flex justify-center box-border h-8 w-1/4 border-2 border-red-400">
+              <span className="font-medium py-1 px-2 text-red-500 align-middle">
+                {data.category}
+              </span>
+            </div>
+          )}
+
           <div className="flex justify-end">
             <Button variant="contained" onClick={() => addToVerify()}>
               Verify now
