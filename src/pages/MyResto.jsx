@@ -79,7 +79,7 @@ const MyResto = () => {
       <Layout>
         <div className="h-full dark:text-white">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Resto</h1>
-          <div className="flex flex-col items-center my-48">
+          <div className="flex flex-col items-center py-48">
             {["unverification", "verified"].includes(verifikasi) ? (
               <div className="flex flex-col justify-center">
                 <CardMyresto

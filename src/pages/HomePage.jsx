@@ -75,7 +75,7 @@ const HomePage = () => {
         <div className="hero-image flex justify-center  items-center w-full">
           <div className="flex justify-center  items-center flex-col">
             <div className="  flex justify-center items-center mx-auto text-lg md:text-3xl lg:text-5xl text-white font-semibold mb-5">
-              Discover the best food & drinks in Nusantara
+              Discover the best food & drink in Nusantara
             </div>
 
             <div class="flex justify-center items-center flex-column">
@@ -119,7 +119,7 @@ const HomePage = () => {
           </div>
         </div>
 
-        <div className="grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-4 lg:grid-cols-4 m-2 gap-3">
+        <div className="py-4 px-4 grid grid-flow-row auto-rows-max grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-3">
           {resto.map((item) => (
             <CardHomePage
               key={item.id}
