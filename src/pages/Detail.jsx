@@ -23,7 +23,8 @@ const Detail = (props) => {
 
   const { detail_id } = params;
 
-  let ishalal = data.category == "halal";
+  let ishalal = data.category === "halal";
+  let loggedin = localStorage.getItem("token");
 
   useEffect(() => {
     fetchData();
@@ -62,66 +63,87 @@ const Detail = (props) => {
   }
 
   const postComment = () => {
-    setLoading(true);
-    axios({
-      method: "post",
-      url: `https://group3.altaproject.online/comments/${detail_id}`,
-      data: {
-        comment: commentInput,
-        rating: Number(ratingInput),
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        fetchComments();
-        fetchData();
-        swal({
-          title: "Good job!",
-          text: "SUCCESS ADD COMMENT",
-        });
+    if (loggedin) {
+      setLoading(true);
+      axios({
+        method: "post",
+        url: `https://group3.altaproject.online/comments/${detail_id}`,
+        data: {
+          comment: commentInput,
+          rating: Number(ratingInput),
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
+        .then((res) => {
+          console.log(res.data);
+          fetchComments();
+          fetchData();
+          swal({
+            title: "Good job!",
+            text: "SUCCESS ADD COMMENT",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      swal({
+        title: "Error",
+        text: "Please login first",
+      });
+    }
   };
 
   const addToFavorite = () => {
-    axios({
-      method: "post",
-      url: `https://group3.altaproject.online/favourites/${detail_id}`,
-      data: {
-        id: { detail_id },
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        swal({
-          title: "Good job!",
-          text: "SUCCESS POST",
-        });
+    if (loggedin) {
+      axios({
+        method: "post",
+        url: `https://group3.altaproject.online/favourites/${detail_id}`,
+        data: {
+          id: { detail_id },
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 500) {
+        .then((res) => {
+          console.log(res.data);
           swal({
-            title: "Failed to add!",
-            text: "Resto is already in your favourites list",
+            title: "Good job!",
+            text: "SUCCESS POST",
           });
-        }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 500) {
+            swal({
+              title: "Failed to add!",
+              text: "Resto is already in your favourites list",
+            });
+          }
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: "Please login first",
       });
+    }
   };
 
   const addToBooking = () => {
-    navigate(`/booking/${detail_id}`);
+    if (loggedin) {
+      navigate(`/booking/${detail_id}`);
+    } else {
+      swal({
+        title: "Error",
+        text: "Please login first",
+      });
+    }
   };
 
   if (loading) {

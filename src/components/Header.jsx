@@ -69,9 +69,11 @@ const Header = (props) => {
             />
           )}
         </div>
-        <div className="flex" hidden={loggedout}>
-          <User></User>
-          <Admin></Admin>
+        <div hidden={loggedout}>
+          <div className="flex">
+            <User></User>
+            <Admin></Admin>
+          </div>
         </div>
       </div>
     </nav>
