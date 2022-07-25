@@ -51,6 +51,7 @@ const MyFavorite = () => {
           title: "Good job!",
           text: "SUCCESS DELETE RESTO FAVORITE",
         });
+        getFavorite();
       })
       .catch(function (error) {
         // handle error
@@ -58,7 +59,6 @@ const MyFavorite = () => {
       })
       .finally(() => {
         // setLoading(false);
-        getFavorite();
       });
   };
 

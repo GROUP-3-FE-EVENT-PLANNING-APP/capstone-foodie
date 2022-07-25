@@ -2,9 +2,9 @@ import React from "react";
 
 const AddImage = (props) => {
   return (
-    <div>
-      <form className="flex" onSubmit={props.onSubmit}>
-        <div className="mt-1 flex flex-col ml-5 items-start">
+    <div className="flex items-center">
+      <form onSubmit={props.onSubmit}>
+        <div className="mt-1 flex flex-col ml-5 items-center">
           <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
             <img src={props.image} alt="" width="210" height="210" />
           </span>
@@ -17,7 +17,7 @@ const AddImage = (props) => {
           <button
             disabled={props.isUploaded}
             type="submit"
-            className={`inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]${
+            className={`inline-flex justify-center mt-2 py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]${
               props.isUploaded && " opacity-50 cursor-not-allowed"
             }`}
           >
