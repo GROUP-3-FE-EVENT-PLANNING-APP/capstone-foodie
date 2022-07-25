@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import AddImage from '../components/AddImage';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
+import React, { useEffect, useState } from "react";
+import AddImage from "../components/AddImage";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
 
 const UploadImage = () => {
   const [loading, setLoading] = useState(false);
-  const [objSubmit, setObjSubmit] = useState('');
-  const [images1, setImages1] = useState('');
-  const [images2, setImages2] = useState('');
-  const [images3, setImages3] = useState('');
+  const [objSubmit, setObjSubmit] = useState("");
+  const [images1, setImages1] = useState("");
+  const [images2, setImages2] = useState("");
+  const [images3, setImages3] = useState("");
   const [isUploaded1, setIsUploaded1] = useState(false);
   const [isUploaded2, setIsUploaded2] = useState(false);
   const [isUploaded3, setIsUploaded3] = useState(false);
@@ -17,7 +17,7 @@ const UploadImage = () => {
 
   useEffect(() => {
     if (isUploaded1 && isUploaded2 && isUploaded3) {
-      navigate('/');
+      navigate("/");
     }
   }, [isUploaded1, isUploaded2, isUploaded3]);
 
@@ -30,11 +30,11 @@ const UploadImage = () => {
     }
     e.preventDefault();
     axios({
-      method: 'post',
+      method: "post",
       url: `https://group3.altaproject.online/restaurants/upload`,
       data: formData,
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => {
@@ -62,12 +62,14 @@ const UploadImage = () => {
   return (
     <Layout>
       <div className="h-screen">
-        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">Upload Banner</h1>
+        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">
+          Upload Image Resto
+        </h1>
         <div className="flex justify-center">
           <AddImage
             onChange={(e) => {
               setImages1(URL.createObjectURL(e.target.files[0]));
-              handleChange(e.target.files[0], 'resto_image_url');
+              handleChange(e.target.files[0], "resto_image_url");
             }}
             onSubmit={(e) => addImage1(1, e)}
             isUploaded={isUploaded1}
@@ -76,7 +78,7 @@ const UploadImage = () => {
           <AddImage
             onChange={(e) => {
               setImages2(URL.createObjectURL(e.target.files[0]));
-              handleChange(e.target.files[0], 'resto_image_url');
+              handleChange(e.target.files[0], "resto_image_url");
             }}
             onSubmit={(e) => addImage1(2, e)}
             isUploaded={isUploaded2}
@@ -85,7 +87,7 @@ const UploadImage = () => {
           <AddImage
             onChange={(e) => {
               setImages3(URL.createObjectURL(e.target.files[0]));
-              handleChange(e.target.files[0], 'resto_image_url');
+              handleChange(e.target.files[0], "resto_image_url");
             }}
             onSubmit={(e) => addImage1(3, e)}
             isUploaded={isUploaded3}
