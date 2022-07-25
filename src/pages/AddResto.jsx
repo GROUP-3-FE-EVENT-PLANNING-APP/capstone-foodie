@@ -99,6 +99,7 @@ const AddResto = () => {
     return (
       <Layout>
         <div className="justify-center p-10">
+          <h1 className="text-2xl font-bold md:ml-12">Buat Resto</h1>
           {/* <form className="flex" onSubmit={() => addImage1()}>
             <div className="mt-1 flex flex-col ml-5 items-start">
               <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
@@ -159,7 +160,7 @@ const AddResto = () => {
             </div>
           </form> */}
           <form
-            className="p-10 mt-8 w-full bg-white "
+            className="p-10 w-full bg-white "
             onSubmit={(e) => createResto(e)}
           >
             <div className="shadow sm:rounded-md sm:overflow-hidden">
@@ -194,7 +195,7 @@ const AddResto = () => {
                         name="booking_fee"
                         id="booking_fee"
                         className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="No Telephone"
+                        placeholder="Booking Fee"
                         onChange={(e) =>
                           handleChange(e.target.value, "booking_fee")
                         }
@@ -232,7 +233,7 @@ const AddResto = () => {
                         name="category"
                         id="category"
                         className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Fasilitas"
+                        placeholder="Category"
                         onChange={(e) =>
                           handleChange(e.target.value, "category")
                         }
@@ -263,7 +264,7 @@ const AddResto = () => {
                   </div>
                 </div>
                 <div className="mb-5 mt-5">
-                  <div className="col-span-3 sm:col-span-2">
+                  <div className="col-span-3 sm:col-span-2 mb-5 mt-5">
                     <label className="block text-sm font-medium text-gray-700">
                       Location
                     </label>

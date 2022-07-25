@@ -94,7 +94,7 @@ const MyResto = () => {
                 />
               </div>
             ) : (
-              <div>
+              <div className="text-center">
                 <p className="text-2xl">Kamu tidak memiliki resto</p>
                 <button
                   type="submit"
