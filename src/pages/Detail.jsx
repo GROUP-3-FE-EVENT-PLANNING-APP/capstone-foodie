@@ -10,7 +10,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
-import { comment } from 'postcss';
+import { useNavigate } from 'react-router-dom';
 
 const Detail = (props) => {
   const [data, setData] = useState({});
@@ -19,6 +19,7 @@ const Detail = (props) => {
   const [comments, setComments] = useState([]);
   const [commentInput, setCommentInput] = useState('');
   const [ratingInput, setRatingInput] = useState();
+  const navigate = useNavigate();
 
   const { detail_id } = params;
 
@@ -30,8 +31,6 @@ const Detail = (props) => {
   }, []);
 
   function fetchData() {
-    //console.log(params);
-    const { detail_id } = params;
     axios
       .get(`https://group3.altaproject.online/restaurants/${detail_id}`)
       .then((response) => {
@@ -62,33 +61,33 @@ const Detail = (props) => {
     //.finally(() => setLoading(false));
   }
 
-  const postComment = (props) => {
-    const { detail_id } = params;
+  const postComment = () => {
     setLoading(true);
-    const requestOptions = {
-      method: 'POST',
+    axios({
+      method: 'post',
+      url: `https://group3.altaproject.online/comments/${detail_id}`,
+      data: {
+        comment: commentInput,
+        rating: Number(ratingInput),
+      },
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
-
-      body: JSON.stringify({
-        comment: commentInput,
-        rating: Number(ratingInput),
-      }),
-    };
-    fetch(`https://group3.altaproject.online/comments/${detail_id}`, requestOptions)
-      .then((response) => response.json())
-      .then((data) => {
+    })
+      .then((res) => {
+        console.log(res.data);
         fetchComments();
         fetchData();
+        swal({
+          title: 'Good job!',
+          text: 'SUCCESS ADD COMMENT',
+        });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log(err);
       })
-      .finally(() => {
-        setLoading(false);
-      });
+      .finally(() => setLoading(false));
   };
 
   const addToFavorite = () => {
@@ -112,7 +111,17 @@ const Detail = (props) => {
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.status === 500) {
+          swal({
+            title: 'Failed to add!',
+            text: 'Resto is already in your favourites list',
+          });
+        }
       });
+  };
+
+  const addToBooking = () => {
+    navigate(`/booking/${detail_id}`);
   };
 
   if (loading) {
@@ -139,13 +148,13 @@ const Detail = (props) => {
             </div>
           </div>
           <div hidden={!ishalal}>
-            <div className="flex justify-center box-border h-8 w-1/4 border-2 border-green-400">
-              <span className="font-medium py-1 px-2 text-green-500 align-middle">Halal</span>
+            <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-full w-1/4">
+              <span className="text-sm font-medium py-1 px-2 text-white align-middle">Halal</span>
             </div>
           </div>
           <div hidden={ishalal}>
-            <div className="flex justify-center box-border h-8 w-1/4 border-2 border-red-400">
-              <span className="font-medium py-1 px-2 text-red-500 align-middle">Non Halal</span>
+            <div className="flex justify-center h-8 w-full my-2 bg-red-500 rounded-full w-1/4">
+              <span className="text-sm font-medium py-1 px-2 text-white align-middle">Non Halal</span>
             </div>
           </div>
           <div className="flex justify-end">
@@ -155,9 +164,11 @@ const Detail = (props) => {
               </Button>
             </div>
 
-            <Button variant="contained">Book now</Button>
+            <Button onClick={addToBooking} variant="contained">
+              Book now
+            </Button>
           </div>
-          <div className="px-10">
+          <div className="px-10 dark:text-white">
             <div className="pt-5 text-2xl font-medium">{data.resto_name}</div>
             <div className="text-sm font-light">{data.location}</div>
             <p class="mb-5  bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
@@ -171,7 +182,7 @@ const Detail = (props) => {
               <img className="w-96 mb-5" src={data.menu_image_url} alt="" />
             </div>
             {/* right side */}
-            <div className="shadow-lg px-5 lg:pl-24 lg:pr-24 py-8">
+            <div className="shadow-lg px-5 lg:pl-24 lg:pr-24 py-8 dark:text-white">
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
                 <ul>
@@ -187,7 +198,7 @@ const Detail = (props) => {
               <div>
                 <PlaceIcon />
                 Location
-                <div className="text-sm">{data.location}</div>
+                <div className="text-sm font-light">{data.location}</div>
                 <Map name={data.resto_name} latitude={data.latitude} longitude={data.longitude} />
               </div>
             </div>

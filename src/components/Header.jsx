@@ -4,20 +4,20 @@ import User from "./User";
 import Admin from "./Admin";
 import { Link } from "react-router-dom";
 import Logonav from "../assets/images/foodie.png";
+import { ThemeContext } from "../utils/context";
+import { useContext } from "react";
+import { FaSun, FaMoon } from "react-icons/fa";
 
-const Header = () => {
-  let loggedin;
-  let loggedout;
-  if (typeof window !== "undefined") {
-    //console.log("You are on the browser");
-    loggedin = localStorage.getItem("token");
-    loggedout = !loggedin;
+const Header = (props) => {
+  let loggedin = localStorage.getItem("token");
+  let loggedout = !loggedin;
 
-    // 👉️ can use localStorage here
-  } else {
-    //console.log("You are on the server");
-    // 👉️ can't use localStorage
-  }
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const handleThemeChange = (mode) => {
+    setTheme(mode);
+    localStorage.setItem("theme", mode);
+  };
 
   return (
     <nav className="flex items-center justify-between flex-wrap p-6 border-b-2 bg-blue-600">
@@ -56,7 +56,20 @@ const Header = () => {
             </div>
           </div>
         </div>
-        <div hidden={loggedout}>
+        <div className="flex justify-center items-center">
+          {theme === "dark" ? (
+            <FaSun
+              className="w-7  h-7 cursor-pointer text-white"
+              onClick={() => handleThemeChange("light")}
+            />
+          ) : (
+            <FaMoon
+              className="w-7  h-7 cursor-pointer text-white"
+              onClick={() => handleThemeChange("dark")}
+            />
+          )}
+        </div>
+        <div className="flex" hidden={loggedout}>
           <User></User>
           <Admin></Admin>
         </div>

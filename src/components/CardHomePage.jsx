@@ -12,22 +12,31 @@ function CardHomePage(props) {
             onClick={props.onClickItem}
           >
             <img
-              className="object-cover max-w-full transition duration-0 hover:duration-150 hover:scale-125 h-auto rounded-md"
+              className="object-cover max-w-full transition duration-0 hover:duration-150 hover:scale-125 h-full rounded-md"
               width="500"
-              height="750"
+              height="400"
               src={props.image}
               alt={props.image}
             />
-            <div className="">
-              <h2 className="mt-2 font-bold">{props.restoname}</h2>
+            <div>
+              <h2 className="mt-2 font-bold text-lg">{props.restoname}</h2>
               <div>
-                <p className="my-2">{props.location}</p>
+                <p className="mb-2 text-sm">{props.location}</p>
                 <div className="flex flex-row">
                   <div class="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
                     {props.rating.toFixed(1)}
                     <AiFillStar />
                   </div>
-                  <div className="ml-2 my-3 text-gray-600">RATED</div>
+                  {props.rating ? (
+                    <div className="ml-2 my-3 font-light text-gray-600">
+                      RATED
+                    </div>
+                  ) : (
+                    <div className="ml-2 my-3 font-light text-gray-600">
+                      NOT RATED
+                    </div>
+                  )}
+                  {/* <div className="ml-2 my-3 text-gray-600">RATED</div> */}
                 </div>
               </div>
             </div>
@@ -44,7 +53,7 @@ function CardHomePage(props) {
               <span className="text-sm font-medium py-1 px-2 text-white align-middle">
                 {props.category}
               </span>
-            </div>{" "}
+            </div>
           </div>
         </div>
       </>

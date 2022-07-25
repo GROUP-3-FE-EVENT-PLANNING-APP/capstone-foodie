@@ -8,10 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const EditResto = () => {
   const [objSubmit, setObjSubmit] = useState("");
-  const [image, setMenu] = useState("");
-  const [images, setImages] = useState("");
-  const [gambar, setGambar] = useState("");
-  const [lukisan, setLukisan] = useState("");
+  const [menu, setMenu] = useState("");
   const [berkas, setBerkas] = useState("");
   const navigate = useNavigate();
   const [latitude, setLatitude] = useState("");
@@ -71,10 +68,13 @@ const EditResto = () => {
   } else {
     return (
       <Layout>
-        <div className="flex justify-center p-10">
+        <div className="justify-center p-10">
+          <div className="text-center text-2xl font-bold md:ml-12 pt-5">
+            Edit Resto
+          </div>
           <form
-            className="p-10 mt-8 w-full bg-white "
-            onSubmit={() => editsResto()}
+            className="p-10 w-full bg-white "
+            onSubmit={(e) => editsResto(e)}
           >
             <div className="shadow sm:rounded-md sm:overflow-hidden">
               <div className="px-4 py-5 bg-white">
@@ -88,8 +88,8 @@ const EditResto = () => {
                         id="input-resto"
                         type="text"
                         name="resto_name"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="Name"
+                        className="py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-r-md sm:text-sm border-gray-300"
+                        placeholder=" Name"
                         onChange={(e) =>
                           handleChange(e.target.value, "resto_name")
                         }
@@ -107,8 +107,8 @@ const EditResto = () => {
                         type="text"
                         name="booking_fee"
                         id="booking_fee"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="booking_fee"
+                        className="py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-r-md sm:text-sm border-gray-300"
+                        placeholder=" Harga Booking"
                         onChange={(e) =>
                           handleChange(e.target.value, "booking_fee")
                         }
@@ -126,8 +126,8 @@ const EditResto = () => {
                         type="text"
                         name="fasilitas"
                         id="input-fasilitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Fasilitas"
+                        className="py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Fasilitas"
                         onChange={(e) =>
                           handleChange(e.target.value, "facility")
                         }
@@ -141,19 +141,19 @@ const EditResto = () => {
                       Category
                     </label>
                     <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
-                      <input
+                      <select
                         type="text"
                         name="category"
                         id="category"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Fasilitas"
+                        className="py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Category"
                         onChange={(e) =>
                           handleChange(e.target.value, "category")
                         }
                       >
-                        {/* <option value="halal">Halal</option>
-                      <option value="non halal">Non Halal</option> */}
-                      </input>
+                        <option value="halal">Halal</option>
+                        <option value="non halal">Non Halal</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -164,11 +164,11 @@ const EditResto = () => {
                     </label>
                     <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                       <input
-                        type="text"
+                        type="number"
                         name="table_quota"
                         id="input-kapasitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Kapasitas meja"
+                        className="py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Kapasitas meja"
                         onChange={(e) =>
                           handleChange(e.target.value, "table_quota")
                         }
@@ -177,7 +177,7 @@ const EditResto = () => {
                   </div>
                 </div>
                 <div className="mb-5 mt-5">
-                  <div className="col-span-3 sm:col-span-2">
+                  <div className="col-span-3 sm:col-span-2 mb-4">
                     <label className="block text-sm font-medium text-gray-700">
                       Location
                     </label>
@@ -186,8 +186,8 @@ const EditResto = () => {
                         type="text"
                         name="location"
                         id="input-kapasitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Location"
+                        className="py-2 rounded-md focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Location"
                         onChange={(e) =>
                           handleChange(e.target.value, "location")
                         }
@@ -195,18 +195,25 @@ const EditResto = () => {
                     </div>
                   </div>
                   <AddMap onChangeLocation={setLocation} />
-                  <input
-                    disabled
-                    type="text"
-                    value={latitude}
-                    onChange={(e) => handleChange(e.target.value, "latitude")}
-                  />
-                  <input
-                    disabled
-                    type="text"
-                    value={longitude}
-                    onChange={(e) => handleChange(e.target.value, "longitude")}
-                  />
+                  <div className="text-sm">
+                    {"Lattitude : "}
+                    <input
+                      disabled
+                      type="text"
+                      value={latitude}
+                      onChange={(e) => handleChange(e.target.value, "latitude")}
+                    />
+                    <br />
+                    {"Longitude : "}
+                    <input
+                      disabled
+                      type="text"
+                      value={longitude}
+                      onChange={(e) =>
+                        handleChange(e.target.value, "longitude")
+                      }
+                    />
+                  </div>
                 </div>
 
                 <div className="mb-5 mt-5">
@@ -215,7 +222,7 @@ const EditResto = () => {
                   </div>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
+                      <img src={menu} alt="" width="210" height="210" />
                     </span>
                     <input
                       type="file"
@@ -234,7 +241,7 @@ const EditResto = () => {
                   </div>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
+                      <img src={berkas} alt="" width="210" height="210" />
                     </span>
                     <input
                       type="file"

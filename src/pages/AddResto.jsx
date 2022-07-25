@@ -5,10 +5,10 @@ import { useState } from "react";
 import axios from "axios";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
-import AddImage from "../components/AddImage";
+
 const AddResto = () => {
   const [objSubmit, setObjSubmit] = useState("");
-  const [image, setMenu] = useState("");
+  const [menu, setMenu] = useState("");
   const [images, setImages] = useState("");
   const [berkas, setBerkas] = useState("");
   const [latitude, setLatitude] = useState("");
@@ -40,37 +40,9 @@ const AddResto = () => {
       .catch(function (error) {
         // handle error
         console.log(error);
+        swal("error", error.response.data.message, "error");
       })
       .finally(() => setLoading(false));
-  };
-
-  const addImage1 = () => {
-    setLoading(true);
-    const formData = new FormData();
-
-    for (const key in objSubmit) {
-      formData.append(key, objSubmit[key]);
-    }
-    //e.preventDefault();
-    axios({
-      method: "post",
-      url: `https://group3.altaproject.online/restaurants/upload`,
-      data: formData,
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    })
-      .then((response) => {
-        // handle success
-        console.log(response);
-        swal("Good job!", "Sukses Edit Resto ", "success");
-        navigate("/");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-    //.finally(() => setLoading(false));
   };
 
   const handleChange = (value, key) => {
@@ -99,66 +71,9 @@ const AddResto = () => {
     return (
       <Layout>
         <div className="justify-center p-10">
-          <h1 className="text-2xl font-bold md:ml-12">Buat Resto</h1>
-          {/* <form className="flex" onSubmit={() => addImage1()}>
-            <div className="mt-1 flex flex-col ml-5 items-start">
-              <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                <img src="" alt="" width="210" height="210" />
-              </span>
-              <input
-                type="file"
-                className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onChange={(e) => {
-                  setImages(URL.createObjectURL(e.target.files[0]));
-                  handleChange(e.target.files[0], "resto_image_url");
-                }}
-              />
-              <button
-                type="submit"
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
-              >
-                add image
-              </button>
-            </div>
-            <div className="mt-1 flex flex-col ml-5 items-start">
-              <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                <img src="" alt="" width="210" height="210" />
-              </span>
-              <input
-                type="file"
-                className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onChange={(e) => {
-                  setImages(URL.createObjectURL(e.target.files[0]));
-                  handleChange(e.target.files[0], "resto_image_url");
-                }}
-              />
-              <button
-                type="submit"
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
-              >
-                add image
-              </button>
-            </div>
-            <div className="mt-1 flex flex-col ml-5 items-start">
-              <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                <img src="" alt="" width="210" height="210" />
-              </span>
-              <input
-                type="file"
-                className="bg-white md:w-52 py-2 px-3 mt-2 border border-gray-300 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                onChange={(e) => {
-                  setImages(URL.createObjectURL(e.target.files[0]));
-                  handleChange(e.target.files[0], "resto_image_url");
-                }}
-              />
-              <button
-                type="submit"
-                className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
-              >
-                add image
-              </button>
-            </div>
-          </form> */}
+          <div className="text-center text-2xl font-bold md:ml-12 pt-5">
+            Create Resto
+          </div>
           <form
             className="p-10 w-full bg-white "
             onSubmit={(e) => createResto(e)}
@@ -175,8 +90,8 @@ const AddResto = () => {
                         id="input-resto"
                         type="text"
                         name="resto_name"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="Name"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300"
+                        placeholder=" Name"
                         onChange={(e) =>
                           handleChange(e.target.value, "resto_name")
                         }
@@ -194,8 +109,8 @@ const AddResto = () => {
                         type="text"
                         name="booking_fee"
                         id="booking_fee"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
-                        placeholder="Booking Fee"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300"
+                        placeholder=" Harga Booking"
                         onChange={(e) =>
                           handleChange(e.target.value, "booking_fee")
                         }
@@ -213,8 +128,8 @@ const AddResto = () => {
                         type="text"
                         name="fasilitas"
                         id="input-fasilitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Fasilitas"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Fasilitas"
                         onChange={(e) =>
                           handleChange(e.target.value, "facility")
                         }
@@ -228,19 +143,20 @@ const AddResto = () => {
                       Category
                     </label>
                     <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
-                      <input
+                      <select
+                        selected="halal"
                         type="text"
                         name="category"
                         id="category"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Category"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Category"
                         onChange={(e) =>
                           handleChange(e.target.value, "category")
                         }
                       >
-                        {/* <option value="halal">Halal</option>
-                      <option value="non halal">Non Halal</option> */}
-                      </input>
+                        <option value="halal">Halal</option>
+                        <option value="non halal">Non Halal</option>
+                      </select>
                     </div>
                   </div>
                 </div>
@@ -251,11 +167,11 @@ const AddResto = () => {
                     </label>
                     <div className="mt-1 flex rounded-md border-2 border-grey-600 shadow-sm">
                       <input
-                        type="text"
+                        type="number"
                         name="table_quota"
                         id="input-kapasitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Kapasitas meja"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Kapasitas meja"
                         onChange={(e) =>
                           handleChange(e.target.value, "table_quota")
                         }
@@ -264,7 +180,7 @@ const AddResto = () => {
                   </div>
                 </div>
                 <div className="mb-5 mt-5">
-                  <div className="col-span-3 sm:col-span-2 mb-5 mt-5">
+                  <div className="col-span-3 sm:col-span-2 mb-4">
                     <label className="block text-sm font-medium text-gray-700">
                       Location
                     </label>
@@ -273,8 +189,8 @@ const AddResto = () => {
                         type="text"
                         name="location"
                         id="input-kapasitas"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
-                        placeholder="Location"
+                        className="py-2 focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md rounded-r-md sm:text-sm border-gray-300 placeholder:to-black"
+                        placeholder=" Location"
                         onChange={(e) =>
                           handleChange(e.target.value, "location")
                         }
@@ -282,18 +198,25 @@ const AddResto = () => {
                     </div>
                   </div>
                   <AddMap onChangeLocation={setLocation} />
-                  <input
-                    disabled
-                    type="text"
-                    value={latitude}
-                    onChange={(e) => handleChange(e.target.value, "latitude")}
-                  />
-                  <input
-                    disabled
-                    type="text"
-                    value={longitude}
-                    onChange={(e) => handleChange(e.target.value, "longitude")}
-                  />
+                  <div className="text-sm">
+                    {"Lattitude : "}
+                    <input
+                      disabled
+                      type="text"
+                      value={latitude}
+                      onChange={(e) => handleChange(e.target.value, "latitude")}
+                    />
+                    <br />
+                    {"Longitude : "}
+                    <input
+                      disabled
+                      type="text"
+                      value={longitude}
+                      onChange={(e) =>
+                        handleChange(e.target.value, "longitude")
+                      }
+                    />
+                  </div>
                 </div>
 
                 <div className="mb-5 mt-5">
@@ -302,7 +225,7 @@ const AddResto = () => {
                   </div>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
+                      <img src={menu} alt="" width="210" height="210" />
                     </span>
                     <input
                       type="file"
@@ -321,7 +244,7 @@ const AddResto = () => {
                   </div>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
-                      <img src="" alt="" width="210" height="210" />
+                      <img src={berkas} alt="" width="210" height="210" />
                     </span>
                     <input
                       type="file"

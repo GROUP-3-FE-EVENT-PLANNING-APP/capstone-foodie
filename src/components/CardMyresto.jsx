@@ -3,6 +3,8 @@ import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 const CardMyresto = (props) => {
+  const isverified = props.status == "verified";
+
   return (
     <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center mb-5">
       <div className="h-52 lg:h-auto lg:w-72 flex-none lg:rounded-t-none lg:rounded-l text-center overflow-hidden border-y-2 border-l-2 border-gray-400">
@@ -18,11 +20,19 @@ const CardMyresto = (props) => {
             {props.rating.toFixed(1)}
             <AiFillStar />
           </p>
-          <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-green-400">
-            <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
-              {props.category}
-            </span>
-          </div>
+          {props.category == "halal" ? (
+            <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-green-400">
+              <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
+                {props.category}
+              </span>
+            </div>
+          ) : (
+            <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-red-400">
+              <span className="text-sm font-medium py-1 px-2 text-red-500 align-middle">
+                {props.category}
+              </span>
+            </div>
+          )}
 
           <button
             type="submit"
@@ -40,11 +50,23 @@ const CardMyresto = (props) => {
           </button>
         </div>
       </div>
-      <div className="md:-ml-8">
-        <span className="text-sm font-medium bg-green-100 py-1 px-2 rounded text-green-500 align-middle">
-          {props.status}
-        </span>
-      </div>
+      {isverified ? (
+        <div>
+          <div className="md:-ml-8">
+            <span className="text-sm font-medium bg-green-100 py-1 px-2 rounded text-green-500 align-middle">
+              verified
+            </span>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <div className="md:-ml-8">
+            <span className="text-sm font-medium bg-red-100 py-1 px-2 rounded text-red-500 align-middle">
+              not verified
+            </span>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

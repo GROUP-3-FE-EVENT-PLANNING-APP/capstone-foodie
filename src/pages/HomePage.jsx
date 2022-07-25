@@ -3,13 +3,17 @@ import { CardHomePage } from "../components/CardHomePage";
 import Layout from "../components/Layout";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
+
 import axios from "axios";
 import "../styles/App.css";
 
 const HomePage = () => {
   const [resto, setResto] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  const search = searchParams.get("search");
 
   useEffect(() => {
     fetchResto();
@@ -36,6 +40,29 @@ const HomePage = () => {
       .finally(() => setLoading(false));
   };
 
+  const handleSearch = () => {
+    axios
+      .get(
+        `https://group3.altaproject.online/search-restaurant?search=${search}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        // handle success
+        console.log(response);
+
+        const results = response.data.data;
+        setResto(results);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
+
   if (loading) {
     return (
       <div className="flex bg-white w-full h-screen">
@@ -60,11 +87,15 @@ const HomePage = () => {
                     placeholder="Search"
                     aria-label="Search"
                     aria-describedby="button-addon2"
+                    onChange={(e) =>
+                      setSearchParams({ search: e.target.value })
+                    }
                   />
                   <button
                     className="btn px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700  focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out flex items-center"
                     type="button"
                     id="button-addon2"
+                    onClick={() => [handleSearch(), setSearchParams("")]}
                   >
                     <svg
                       aria-hidden="true"

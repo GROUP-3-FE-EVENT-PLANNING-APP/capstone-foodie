@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import CardMyresto from "../components/CardMyresto";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import swal from "sweetalert";
 
@@ -76,10 +77,10 @@ const MyResto = () => {
   } else {
     return (
       <Layout>
-        <div className="h-full">
+        <div className="h-full dark:text-white">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Resto</h1>
           <div className="flex flex-col items-center my-48">
-            {["unverification", "verification"].includes(verifikasi) ? (
+            {["unverification", "verified"].includes(verifikasi) ? (
               <div className="flex flex-col justify-center">
                 <CardMyresto
                   key={resto.id}
@@ -94,14 +95,16 @@ const MyResto = () => {
                 />
               </div>
             ) : (
-              <div className="text-center">
+              <div className="dark:text-white">
                 <p className="text-2xl">Kamu tidak memiliki resto</p>
-                <button
-                  type="submit"
-                  className="py-2 px-4 mr-3 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
-                >
-                  <Link to="/addresto">Buat Resto</Link>
-                </button>
+                <div className="text-center">
+                  <button
+                    type="submit"
+                    className="py-2 px-4 mr-3 mt-3 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#5587E8] hover:bg-[#2869eb] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#5784de]"
+                  >
+                    <Link to="/addresto">Buat Resto</Link>
+                  </button>
+                </div>
               </div>
             )}
           </div>
