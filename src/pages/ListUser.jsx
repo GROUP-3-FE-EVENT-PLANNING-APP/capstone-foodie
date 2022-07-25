@@ -46,7 +46,7 @@ const ListUser = () => {
   } else {
     return (
       <Layout>
-        <div className="h-full w-full">
+        <div className="h-full w-full pb-10">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">List User</h1>
           <div>
             <div className="grid grid-cols-3 mr-8 gap-4">

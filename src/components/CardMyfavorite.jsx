@@ -11,11 +11,11 @@ const CardMyfavorite = ({
 }) => {
   const ishalal = category == "halal";
   return (
-    <div className="max-w-sm w-full lg:max-w-full lg:flex justify-center">
+    <div className="w-full lg:flex justify-center">
       <div className="h-52 lg:h-full lg:w-72 flex-none lg:rounded-t-none lg:rounded-l text-center overflow-hidden border-y-2 border-l-2 border-gray-400">
         <img className="h-full w-full" src={image} alt="img" />
       </div>
-      <div className="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+      <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
         <div>
           <h2 className="text-gray-900 font-bold text-xl">{title}</h2>
           <p className="text-gray-700 text-sm">{location}</p>
@@ -23,14 +23,14 @@ const CardMyfavorite = ({
             {rating.toFixed(1)} <AiFillStar />
           </p>
           <div hidden={!ishalal}>
-            <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-green-400">
+            <div className="rounded-md flex justify-center box-border h-8 w-36 my-2 border-2 border-green-400">
               <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
                 {category}
               </span>
             </div>
           </div>
           <div hidden={ishalal}>
-            <div className="flex justify-center box-border h-8 w-36 my-2 border-2 border-red-400">
+            <div className="rounded-md flex justify-center box-border h-8 w-36 my-2 border-2 border-red-400">
               <span className="text-sm font-medium py-1 px-2 text-red-500 align-middle">
                 {category}
               </span>
@@ -38,7 +38,7 @@ const CardMyfavorite = ({
           </div>
           <button
             type="submit"
-            className="inline-flex justify-center py-2 px-4 mx-7 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#D9613C] hover:bg-[#ce542f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b85a3d]"
+            className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-[#D9613C] hover:bg-[#ce542f] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#b85a3d]"
             onClick={onClick}
           >
             Remove

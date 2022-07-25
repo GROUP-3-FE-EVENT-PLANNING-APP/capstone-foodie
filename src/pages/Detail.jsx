@@ -24,7 +24,8 @@ const Detail = (props) => {
 
   const { detail_id } = params;
 
-  let ishalal = data.category == 'halal';
+  let ishalal = data.category === 'halal';
+  let loggedin = localStorage.getItem('token');
 
   useEffect(() => {
     fetchData();
@@ -63,66 +64,87 @@ const Detail = (props) => {
   }
 
   const postComment = () => {
-    setLoading(true);
-    axios({
-      method: 'post',
-      url: `https://group3.altaproject.online/comments/${detail_id}`,
-      data: {
-        comment: commentInput,
-        rating: Number(ratingInput),
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        fetchComments();
-        fetchData();
-        swal({
-          title: 'Good job!',
-          text: 'SUCCESS ADD COMMENT',
-        });
+    if (loggedin) {
+      setLoading(true);
+      axios({
+        method: 'post',
+        url: `https://group3.altaproject.online/comments/${detail_id}`,
+        data: {
+          comment: commentInput,
+          rating: Number(ratingInput),
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
+        .then((res) => {
+          console.log(res.data);
+          fetchComments();
+          fetchData();
+          swal({
+            title: 'Good job!',
+            text: 'SUCCESS ADD COMMENT',
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      swal({
+        title: 'Error',
+        text: 'Please login first',
+      });
+    }
   };
 
   const addToFavorite = () => {
-    axios({
-      method: 'post',
-      url: `https://group3.altaproject.online/favourites/${detail_id}`,
-      data: {
-        id: { detail_id },
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        swal({
-          title: 'Good job!',
-          text: 'SUCCESS POST',
-        });
+    if (loggedin) {
+      axios({
+        method: 'post',
+        url: `https://group3.altaproject.online/favourites/${detail_id}`,
+        data: {
+          id: { detail_id },
+        },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + localStorage.getItem('token'),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 500) {
+        .then((res) => {
+          console.log(res.data);
           swal({
-            title: 'Failed to add!',
-            text: 'Resto is already in your favourites list',
+            title: 'Good job!',
+            text: 'SUCCESS POST',
           });
-        }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 500) {
+            swal({
+              title: 'Failed to add!',
+              text: 'Resto is already in your favourites list',
+            });
+          }
+        });
+    } else {
+      swal({
+        title: 'Error',
+        text: 'Please login first',
       });
+    }
   };
 
   const addToBooking = () => {
-    navigate(`/booking/${detail_id}`);
+    if (loggedin) {
+      navigate(`/booking/${detail_id}`);
+    } else {
+      swal({
+        title: 'Error',
+        text: 'Please login first',
+      });
+    }
   };
 
   if (loading) {
@@ -132,7 +154,7 @@ const Detail = (props) => {
       <Layout>
         {/* detail image */}
 
-        <div className="container px-5 mx-auto lg:px-20">
+        <div className="container px-5 mx-auto lg:px-20 dark:text-white">
           <div className="grid-cols-3 px-5 py-5 space-y-2 lg:space-y-0 lg:grid lg:gap-3">
             <div className="w-full col-span-2 row-span-2 rounded">
               <img className="w-full h-full" src={data.resto_images[0].resto_image_url} alt="" />
@@ -145,12 +167,12 @@ const Detail = (props) => {
             </div>
           </div>
           <div hidden={!ishalal}>
-            <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-full w-1/4">
+            <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-md w-1/4">
               <span className="text-sm font-medium py-1 px-2 text-white align-middle">Halal</span>
             </div>
           </div>
           <div hidden={ishalal}>
-            <div className="flex justify-center h-8 w-full my-2 bg-red-500 rounded-full w-1/4">
+            <div className="flex justify-center h-8 w-full my-2 bg-red-500 rounded-md w-1/4">
               <span className="text-sm font-medium py-1 px-2 text-white align-middle">Non Halal</span>
             </div>
           </div>

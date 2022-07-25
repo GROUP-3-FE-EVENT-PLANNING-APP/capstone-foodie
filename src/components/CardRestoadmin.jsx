@@ -32,21 +32,21 @@ const CardRestoadmin = ({
           {console.log(image)}
           <div className="px-3 py-2">
             {category == "halal" ? (
-              <div className="flex justify-center box-border h-8 w-full my-2 border-2 border-green-400">
+              <div className="rounded-md flex justify-center box-border h-8 w-full my-2 border-2 border-green-400">
                 <span className="text-sm font-medium py-1 px-2 text-green-500 align-middle">
                   {category}
                 </span>
               </div>
             ) : (
-              <div className="flex justify-center box-border h-8 w-full my-2 border-2 border-red-400">
+              <div className="rounded-md flex justify-center box-border h-8 w-full my-2 border-2 border-red-400">
                 <span className="text-sm font-medium py-1 px-2 text-red-500 align-middle">
                   {category}
                 </span>
               </div>
             )}
-            <p className="mt-2 text-bold">{title}</p>
-            <div className="md:text-lg md:font-semibold  ">
-              <p className="">{location}</p>
+            <p className="mt-2 text-lg font-semibold">{title}</p>
+            <div className="md:text-lg">
+              <p className="text-sm">{location}</p>
               <p class="bg-gray-100 text-gray-800 text-sm font-semibold inline-flex items-center p-1.5 rounded dark:bg-gray-200 dark:text-gray-800 my-2">
                 {rating.toFixed(1)} <AiFillStar />
               </p>
@@ -55,13 +55,13 @@ const CardRestoadmin = ({
           {status == "verified" ? (
             <div className="flex justify-center h-8 w-full bg-green-500">
               <span className="text-sm font-medium py-1 px-2 text-white align-middle">
-                {status}
+                verified
               </span>
             </div>
           ) : (
             <div className="flex justify-center h-8 w-full bg-[#D9613C]">
               <span className="text-sm font-medium py-1 px-2 text-white align-middle">
-                {status}
+                not verified
               </span>
             </div>
           )}

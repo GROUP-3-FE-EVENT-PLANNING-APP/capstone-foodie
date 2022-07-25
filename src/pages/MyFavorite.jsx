@@ -52,6 +52,7 @@ const MyFavorite = () => {
           title: 'Good job!',
           text: 'SUCCESS DELETE RESTO FAVORITE',
         });
+        getFavorite();
       })
       .catch(function (error) {
         // handle error
@@ -59,7 +60,6 @@ const MyFavorite = () => {
       })
       .finally(() => {
         // setLoading(false);
-        getFavorite();
       });
   };
 
@@ -70,7 +70,7 @@ const MyFavorite = () => {
       <Layout>
         <div className="h-screen dark:text-white">
           <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">My Favorite</h1>
-          <div className="grid grid-cols-2 mx-5 gap-4">
+          <div className="grid grid-cols-2 mx-6 gap-6">
             {favourites.map((item, index) => (
               <CardMyfavorite key={index} image={item.resto_image_url} title={item.resto_name} location={item.location} rating={item.rating} category={item.category} onClick={() => handleRemove(item.resto_id)} />
             ))}

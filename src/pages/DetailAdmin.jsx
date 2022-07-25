@@ -56,7 +56,7 @@ const Detail = () => {
 
     axios({
       method: 'post',
-      url: `https://group3.altaproject.online/admins/verif/5`,
+      url: `https://group3.altaproject.online/admins/verif/${admindetail_id}`,
       data: {
         id: admindetail_id,
       },

@@ -174,7 +174,7 @@ const EditResto = () => {
 
                 <div className="mb-5 mt-5">
                   <div>
-                    <p>Upload Menu</p>
+                    <p>Upload Berkas</p>
                   </div>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">
@@ -193,7 +193,7 @@ const EditResto = () => {
 
                 <div className="mb-5 mt-5">
                   <div>
-                    <p>Upload Berkas</p>
+                    <p>Upload Menu</p>
                   </div>
                   <div className="mt-1 flex items-center">
                     <span className="inline-block max-h-80 max-w-7xl overflow-hidden bg-gray-100">

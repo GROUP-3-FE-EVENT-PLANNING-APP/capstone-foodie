@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import AddImage from '../components/AddImage';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Layout from '../components/Layout';
 
 const UploadImage = () => {
   const [loading, setLoading] = useState(false);
@@ -59,37 +60,40 @@ const UploadImage = () => {
   };
 
   return (
-    <div>
-      <div className="flex">
-        <AddImage
-          onChange={(e) => {
-            setImages1(URL.createObjectURL(e.target.files[0]));
-            handleChange(e.target.files[0], 'resto_image_url');
-          }}
-          onSubmit={(e) => addImage1(1, e)}
-          isUploaded={isUploaded1}
-          image={images1}
-        />
-        <AddImage
-          onChange={(e) => {
-            setImages2(URL.createObjectURL(e.target.files[0]));
-            handleChange(e.target.files[0], 'resto_image_url');
-          }}
-          onSubmit={(e) => addImage1(2, e)}
-          isUploaded={isUploaded2}
-          image={images2}
-        />
-        <AddImage
-          onChange={(e) => {
-            setImages3(URL.createObjectURL(e.target.files[0]));
-            handleChange(e.target.files[0], 'resto_image_url');
-          }}
-          onSubmit={(e) => addImage1(3, e)}
-          isUploaded={isUploaded3}
-          image={images3}
-        />
+    <Layout>
+      <div className="h-screen">
+        <h1 className="text-2xl font-bold md:ml-12 pt-5 mb-3">Upload Banner</h1>
+        <div className="flex justify-center">
+          <AddImage
+            onChange={(e) => {
+              setImages1(URL.createObjectURL(e.target.files[0]));
+              handleChange(e.target.files[0], 'resto_image_url');
+            }}
+            onSubmit={(e) => addImage1(1, e)}
+            isUploaded={isUploaded1}
+            image={images1}
+          />
+          <AddImage
+            onChange={(e) => {
+              setImages2(URL.createObjectURL(e.target.files[0]));
+              handleChange(e.target.files[0], 'resto_image_url');
+            }}
+            onSubmit={(e) => addImage1(2, e)}
+            isUploaded={isUploaded2}
+            image={images2}
+          />
+          <AddImage
+            onChange={(e) => {
+              setImages3(URL.createObjectURL(e.target.files[0]));
+              handleChange(e.target.files[0], 'resto_image_url');
+            }}
+            onSubmit={(e) => addImage1(3, e)}
+            isUploaded={isUploaded3}
+            image={images3}
+          />
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 };
 
