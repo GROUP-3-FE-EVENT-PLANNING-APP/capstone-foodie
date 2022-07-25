@@ -1,9 +1,10 @@
-import React from "react";
-import CardUser from "../components/CardUser";
-import Layout from "../components/Layout";
-import { useState, useEffect } from "react";
-import swal from "sweetalert";
-import axios from "axios";
+import React from 'react';
+import CardUser from '../components/CardUser';
+import Layout from '../components/Layout';
+import { useState, useEffect } from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { Loading } from '../components/Loading';
 
 const ListUser = () => {
   const [namauser, setNamaUser] = useState();
@@ -15,12 +16,12 @@ const ListUser = () => {
 
   const getUser = () => {
     axios({
-      method: "get",
+      method: 'get',
       url: `https://group3.altaproject.online/admins/users
       `,
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     })
       .then((response) => {
@@ -31,8 +32,8 @@ const ListUser = () => {
       .catch(function (error) {
         // handle error
         swal({
-          title: "Good job!",
-          text: "EROOR",
+          title: 'Good job!',
+          text: 'EROOR',
         });
       })
       .finally(() => {
@@ -41,11 +42,7 @@ const ListUser = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex bg-white w-full h-screen">
-        <h1 className="text-3xl m-auto text-black font-bold ">LOADING...</h1>
-      </div>
-    );
+    return <Loading />;
   } else {
     return (
       <Layout>
@@ -54,12 +51,7 @@ const ListUser = () => {
           <div>
             <div className="grid grid-cols-3 mr-8 gap-4">
               {namauser.map((item, index) => (
-                <CardUser
-                  nama={item.name}
-                  email={item.email}
-                  handphone={item.handphone}
-                  image={item.avatar_url}
-                />
+                <CardUser nama={item.name} email={item.email} handphone={item.handphone} image={item.avatar_url} />
               ))}
             </div>
           </div>

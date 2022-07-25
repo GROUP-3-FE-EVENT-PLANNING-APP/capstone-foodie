@@ -1,10 +1,11 @@
-import React from "react";
-import Layout from "../components/Layout";
-import CardRestoadmin from "../components/CardRestoadmin";
-import { useState, useEffect } from "react";
-import swal from "sweetalert";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import Layout from '../components/Layout';
+import CardRestoadmin from '../components/CardRestoadmin';
+import { useState, useEffect } from 'react';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Loading } from '../components/Loading';
 
 const AdminResto = () => {
   const [daftarresto, setDaftarResto] = useState();
@@ -17,12 +18,12 @@ const AdminResto = () => {
 
   const getAdminRestaurant = (e) => {
     axios({
-      method: "get",
+      method: 'get',
       url: `https://group3.altaproject.online/admins/restaurants
       `,
       headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     })
       .then((response) => {
@@ -33,8 +34,8 @@ const AdminResto = () => {
       .catch(function (error) {
         // handle error
         swal({
-          title: "Good job!",
-          text: "EROOR",
+          title: 'Good job!',
+          text: 'EROOR',
         });
       })
       .finally(() => {
@@ -43,11 +44,7 @@ const AdminResto = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex bg-white w-full h-screen">
-        <h1 className="text-3xl m-auto text-black font-bold ">LOADING...</h1>
-      </div>
-    );
+    return <Loading />;
   } else {
     return (
       <Layout>
