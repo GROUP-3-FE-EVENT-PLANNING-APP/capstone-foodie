@@ -7,8 +7,8 @@ const CommentForms = (props) => {
   const [value, setValue] = React.useState(2);
 
   return (
-    <div className="comment-form flex mx-auto lg:pl-5">
-      <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+    <div className="comment-form flex mx-auto lg:pl-5 dark:text-white ">
+      <form className="w-full max-w-xl bg-white rounded-lg px-4 pt-2 dark:bg-slate-900">
         <h2 className="pt-3 pb-2 text-lg font-medium">Comments and Rating</h2>
 
         <div className="flex flex-wrap -mx-3 mb-6">

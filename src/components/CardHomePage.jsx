@@ -6,7 +6,7 @@ function CardHomePage(props) {
   return (
     <>
       <>
-        <div className="container grow p-7 flex flex-col bg-white max-w-sm mx-auto text-black">
+        <div className="rounded-md container grow p-7 flex flex-col bg-white max-w-sm mx-auto text-black dark:bg-slate-800 dark:text-white">
           <div
             className="cursor-pointer h-full flex flex-col justify-between"
             onClick={props.onClickItem}

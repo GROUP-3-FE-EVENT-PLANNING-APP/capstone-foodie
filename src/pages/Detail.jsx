@@ -1,29 +1,30 @@
-import React from 'react';
-import Layout from '../components/Layout';
-import Map from '../components/Map';
-import PlaceIcon from '@mui/icons-material/Place';
-import Button from '@mui/material/Button';
-import CommentList from '../components/CommentList';
-import CommentForms from '../components/CommentForms';
-import { AiFillStar } from 'react-icons/ai';
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import swal from 'sweetalert';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import Layout from "../components/Layout";
+import Map from "../components/Map";
+import PlaceIcon from "@mui/icons-material/Place";
+import Button from "@mui/material/Button";
+import CommentList from "../components/CommentList";
+import CommentForms from "../components/CommentForms";
+import { AiFillStar } from "react-icons/ai";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import swal from "sweetalert";
+import { useNavigate } from "react-router-dom";
 
 const Detail = (props) => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const [comments, setComments] = useState([]);
-  const [commentInput, setCommentInput] = useState('');
+  const [commentInput, setCommentInput] = useState("");
   const [ratingInput, setRatingInput] = useState();
   const navigate = useNavigate();
 
   const { detail_id } = params;
 
-  let ishalal = data.category == 'halal';
+  let ishalal = data.category === "halal";
+  let loggedin = localStorage.getItem("token");
 
   useEffect(() => {
     fetchData();
@@ -62,66 +63,87 @@ const Detail = (props) => {
   }
 
   const postComment = () => {
-    setLoading(true);
-    axios({
-      method: 'post',
-      url: `https://group3.altaproject.online/comments/${detail_id}`,
-      data: {
-        comment: commentInput,
-        rating: Number(ratingInput),
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        fetchComments();
-        fetchData();
-        swal({
-          title: 'Good job!',
-          text: 'SUCCESS ADD COMMENT',
-        });
+    if (loggedin) {
+      setLoading(true);
+      axios({
+        method: "post",
+        url: `https://group3.altaproject.online/comments/${detail_id}`,
+        data: {
+          comment: commentInput,
+          rating: Number(ratingInput),
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setLoading(false));
+        .then((res) => {
+          console.log(res.data);
+          fetchComments();
+          fetchData();
+          swal({
+            title: "Good job!",
+            text: "SUCCESS ADD COMMENT",
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+        .finally(() => setLoading(false));
+    } else {
+      swal({
+        title: "Error",
+        text: "Please login first",
+      });
+    }
   };
 
   const addToFavorite = () => {
-    axios({
-      method: 'post',
-      url: `https://group3.altaproject.online/favourites/${detail_id}`,
-      data: {
-        id: { detail_id },
-      },
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        swal({
-          title: 'Good job!',
-          text: 'SUCCESS POST',
-        });
+    if (loggedin) {
+      axios({
+        method: "post",
+        url: `https://group3.altaproject.online/favourites/${detail_id}`,
+        data: {
+          id: { detail_id },
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
       })
-      .catch((err) => {
-        console.log(err);
-        if (err.response.status === 500) {
+        .then((res) => {
+          console.log(res.data);
           swal({
-            title: 'Failed to add!',
-            text: 'Resto is already in your favourites list',
+            title: "Good job!",
+            text: "SUCCESS POST",
           });
-        }
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response.status === 500) {
+            swal({
+              title: "Failed to add!",
+              text: "Resto is already in your favourites list",
+            });
+          }
+        });
+    } else {
+      swal({
+        title: "Error",
+        text: "Please login first",
       });
+    }
   };
 
   const addToBooking = () => {
-    navigate(`/booking/${detail_id}`);
+    if (loggedin) {
+      navigate(`/booking/${detail_id}`);
+    } else {
+      swal({
+        title: "Error",
+        text: "Please login first",
+      });
+    }
   };
 
   if (loading) {
@@ -135,31 +157,51 @@ const Detail = (props) => {
       <Layout>
         {/* detail image */}
 
-        <div className="container px-5 mx-auto lg:px-20">
+        <div className="container px-5 mx-auto lg:px-20 dark:text-white">
           <div className="grid-cols-3 px-5 py-5 space-y-2 lg:space-y-0 lg:grid lg:gap-3">
             <div className="w-full col-span-2 row-span-2 rounded">
-              <img className="w-full h-full" src={data.resto_images[0].resto_image_url} alt="" />
+              <img
+                className="w-full h-full"
+                src={data.resto_images[0].resto_image_url}
+                alt=""
+              />
             </div>
             <div>
-              <img className="w-full h-full" src={data.resto_images[1].resto_image_url} alt="" />
+              <img
+                className="w-full h-full"
+                src={data.resto_images[1].resto_image_url}
+                alt=""
+              />
             </div>
             <div>
-              <img className="w-full h-full" src={data.resto_images[2].resto_image_url} alt="" />
+              <img
+                className="w-full h-full"
+                src={data.resto_images[2].resto_image_url}
+                alt=""
+              />
             </div>
           </div>
           <div hidden={!ishalal}>
-            <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-full w-1/4">
-              <span className="text-sm font-medium py-1 px-2 text-white align-middle">Halal</span>
+            <div className="flex justify-center h-8 w-full my-2 bg-[#6ED93C] rounded-md w-1/4">
+              <span className="text-sm font-medium py-1 px-2 text-white align-middle">
+                Halal
+              </span>
             </div>
           </div>
           <div hidden={ishalal}>
-            <div className="flex justify-center h-8 w-full my-2 bg-red-500 rounded-full w-1/4">
-              <span className="text-sm font-medium py-1 px-2 text-white align-middle">Non Halal</span>
+            <div className="flex justify-center h-8 w-full my-2 bg-red-500 rounded-md w-1/4">
+              <span className="text-sm font-medium py-1 px-2 text-white align-middle">
+                Non Halal
+              </span>
             </div>
           </div>
           <div className="flex justify-end">
             <div className="mx-5">
-              <Button variant="outlined" color="error" onClick={() => addToFavorite()}>
+              <Button
+                variant="outlined"
+                color="error"
+                onClick={() => addToFavorite()}
+              >
                 Favorite
               </Button>
             </div>
@@ -199,15 +241,28 @@ const Detail = (props) => {
                 <PlaceIcon />
                 Location
                 <div className="text-sm font-light">{data.location}</div>
-                <Map name={data.resto_name} latitude={data.latitude} longitude={data.longitude} />
+                <Map
+                  name={data.resto_name}
+                  latitude={data.latitude}
+                  longitude={data.longitude}
+                />
               </div>
             </div>
           </div>
           {/* comment */}
           <div>
-            <CommentForms onCommentChange={(e) => setCommentInput(e.target.value)} onRatingChange={(e) => setRatingInput(e.target.value)} submitComment={() => postComment()} />
+            <CommentForms
+              onCommentChange={(e) => setCommentInput(e.target.value)}
+              onRatingChange={(e) => setRatingInput(e.target.value)}
+              submitComment={() => postComment()}
+            />
             {comments.map((comments, index) => (
-              <CommentList key={index} comment={comments.comment} name={comments.name} avatar={comments.avatar_url} />
+              <CommentList
+                key={index}
+                comment={comments.comment}
+                name={comments.name}
+                avatar={comments.avatar_url}
+              />
             ))}
           </div>
         </div>
