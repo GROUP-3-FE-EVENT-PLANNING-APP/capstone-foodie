@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
+import { Loading } from '../components/Loading';
 
 const Detail = (props) => {
   const [data, setData] = useState({});
@@ -125,11 +126,7 @@ const Detail = (props) => {
   };
 
   if (loading) {
-    return (
-      <div className="flex bg-white w-full h-screen">
-        <h1 className="text-3xl m-auto text-black font-bold ">LOADING...</h1>
-      </div>
-    );
+    return <Loading />;
   } else {
     return (
       <Layout>

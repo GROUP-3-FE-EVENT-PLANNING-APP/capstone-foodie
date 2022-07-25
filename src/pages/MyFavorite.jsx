@@ -4,6 +4,7 @@ import CardMyfavorite from '../components/CardMyfavorite';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import swal from 'sweetalert';
+import { Loading } from '../components/Loading';
 
 const MyFavorite = () => {
   const [favourites, setFavourites] = useState([]);
@@ -63,11 +64,7 @@ const MyFavorite = () => {
   };
 
   if (loading) {
-    return (
-      <div className="flex bg-white w-full h-screen">
-        <h1 className="text-3xl m-auto text-black font-bold ">LOADING...</h1>
-      </div>
-    );
+    return <Loading />;
   } else {
     return (
       <Layout>
