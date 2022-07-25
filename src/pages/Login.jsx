@@ -15,6 +15,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import axios from "axios";
 import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { RoleContext } from "../utils/context";
 
 function Copyright(props) {
   return (
@@ -36,7 +38,7 @@ function Copyright(props) {
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
+  const { role, setRole } = useContext(RoleContext);
   const navigate = useNavigate();
 
   const theme = createTheme();
@@ -52,6 +54,7 @@ const Login = () => {
         console.log(response);
         localStorage.setItem("token", response.data.data.token);
         swal("Good job!", "Success Login", "success");
+        setRole(response.data.data.role);
         navigate("/", { replace: true });
       })
       .catch(function (error) {

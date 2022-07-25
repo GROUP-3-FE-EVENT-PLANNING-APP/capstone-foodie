@@ -7,12 +7,14 @@ import Logonav from "../assets/images/foodie.png";
 import { ThemeContext } from "../utils/context";
 import { useContext } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
+import { RoleContext } from "../utils/context";
 
 const Header = (props) => {
   let loggedin = localStorage.getItem("token");
   let loggedout = !loggedin;
 
   const { theme, setTheme } = useContext(ThemeContext);
+  const { role, setRole } = useContext(RoleContext);
 
   const handleThemeChange = (mode) => {
     setTheme(mode);
@@ -71,8 +73,7 @@ const Header = (props) => {
         </div>
         <div hidden={loggedout}>
           <div className="flex">
-            <User></User>
-            <Admin></Admin>
+            {role === "user" ? <User></User> : <Admin></Admin>}
           </div>
         </div>
       </div>
