@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 export default class MultipleImageUploadComponent extends Component {
   fileObj = [];
   fileArray = [];
@@ -19,7 +19,6 @@ export default class MultipleImageUploadComponent extends Component {
   }
   uploadFiles(e) {
     e.preventDefault();
-    console.log(this.state.file);
   }
   render() {
     return (

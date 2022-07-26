@@ -1,15 +1,15 @@
-import React from 'react';
-import Layout from '../components/Layout';
-import { useState, useEffect } from 'react';
-import swal from 'sweetalert';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Loading } from '../components/Loading';
+import React from "react";
+import Layout from "../components/Layout";
+import { useState, useEffect } from "react";
+import swal from "sweetalert";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { Loading } from "../components/Loading";
 
 const Booking = () => {
   const [table_quota, setTable_quota] = useState();
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
   const [loading, setLoading] = useState(false);
 
   const params = useParams();
@@ -19,7 +19,7 @@ const Booking = () => {
   const fetchBooking = () => {
     setLoading(true);
     axios({
-      method: 'post',
+      method: "post",
       url: `https://group3.altaproject.online/restaurants/booking/${detail_id}`,
       data: {
         table_quota: +table_quota,
@@ -27,24 +27,23 @@ const Booking = () => {
         time: time,
       },
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((res) => {
-        console.log(res.data);
-        localStorage.setItem('linkPayment', res.data.data.redirect_url);
+        localStorage.setItem("linkPayment", res.data.data.redirect_url);
         swal({
-          title: 'Good job!',
-          text: 'SUCCESS BOOKING',
+          title: "Good job!",
+          text: "SUCCESS BOOKING",
         });
       })
       .catch((err) => {
         console.log(err);
         if (err.response.status === 500) {
           swal({
-            title: 'Failed to add!',
-            text: 'Resto is already full',
+            title: "Failed to add!",
+            text: "Resto is already full",
           });
         }
       })
@@ -59,7 +58,10 @@ const Booking = () => {
         <div className="h-screen">
           <div className="text-center pt-16">
             <div className="mb-6 mt-5">
-              <label for="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="text"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 Kapasitas meja
               </label>
               <input
@@ -70,7 +72,10 @@ const Booking = () => {
               />
             </div>
             <div className="mb-6">
-              <label for="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="text"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 Tanggal
               </label>
               <input
@@ -82,7 +87,10 @@ const Booking = () => {
             </div>
 
             <div className="mb-6">
-              <label for="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="text"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 Waktu
               </label>
               <input
@@ -93,11 +101,18 @@ const Booking = () => {
               />
             </div>
 
-            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center m-5" onClick={(e) => fetchBooking(e)}>
+            <button
+              type="submit"
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center m-5"
+              onClick={(e) => fetchBooking(e)}
+            >
               Book
             </button>
 
-            <a href={localStorage.getItem('linkPayment')} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center m-5">
+            <a
+              href={localStorage.getItem("linkPayment")}
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center m-5"
+            >
               Pay
             </a>
           </div>

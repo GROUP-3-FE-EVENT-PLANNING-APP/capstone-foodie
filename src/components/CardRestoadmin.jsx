@@ -29,7 +29,6 @@ const CardRestoadmin = ({
             }
             alt="Rumah Makan Padang"
           />
-          {console.log(image)}
           <div className="px-3 py-2">
             {category == "halal" ? (
               <div className="rounded-md flex justify-center box-border h-8 w-full my-2 border-2 border-green-400">

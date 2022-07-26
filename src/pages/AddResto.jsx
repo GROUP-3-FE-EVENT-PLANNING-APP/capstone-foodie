@@ -33,7 +33,6 @@ const AddResto = () => {
     })
       .then((response) => {
         // handle success
-        console.log(response);
         swal("Good job!", "Sukses Create Resto ", "success");
         navigate("/uploadimage");
       })
@@ -50,7 +49,6 @@ const AddResto = () => {
     let temp = { ...objSubmit };
     temp[key] = value;
     setObjSubmit(temp);
-    console.log(temp);
   };
 
   const setLocation = async (lat, lng) => {
