@@ -52,9 +52,7 @@ const Register = () => {
         handphone: handphone,
       })
       .then((response) => {
-        console.log(response);
         localStorage.setItem("token", response.data.token);
-        console.log(response.data.token);
         swal("Good job!", "Success Signup", "success");
         navigate("/login", { replace: true });
       })

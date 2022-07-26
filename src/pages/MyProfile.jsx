@@ -1,17 +1,17 @@
-import React from 'react';
-import Layout from '../components/Layout';
-import { useState, useEffect } from 'react';
-import swal from 'sweetalert';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import { Loading } from '../components/Loading';
+import React from "react";
+import Layout from "../components/Layout";
+import { useState, useEffect } from "react";
+import swal from "sweetalert";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Loading } from "../components/Loading";
 
 const MyProfile = () => {
   const [profile, setProfile] = useState();
   const [loading, setLoading] = useState(true);
   const [remove, setRemove] = useState();
-  const [objSubmit, setObjSubmit] = useState('');
-  const [avatar_url, setAvatar] = useState('');
+  const [objSubmit, setObjSubmit] = useState("");
+  const [avatar_url, setAvatar] = useState("");
 
   const navigate = useNavigate();
 
@@ -21,25 +21,24 @@ const MyProfile = () => {
 
   const getmyProfile = () => {
     axios({
-      method: 'get',
+      method: "get",
       url: `https://group3.altaproject.online/myprofile
       `,
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => {
         // handle success
         const results = response.data.data;
         setProfile(results);
-        console.log(results);
       })
       .catch(function (error) {
         // handle error
         swal({
-          title: 'Good job!',
-          text: 'EROOR',
+          title: "Good job!",
+          text: "EROOR",
         });
       })
       .finally(() => {
@@ -51,8 +50,8 @@ const MyProfile = () => {
     axios
       .delete(`https://group3.altaproject.online/users `, {
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: 'Bearer ' + localStorage.getItem('token'),
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
       })
       .then((response) => {
@@ -60,8 +59,8 @@ const MyProfile = () => {
         const results = response.data.data;
         setRemove(results);
         swal({
-          title: 'Good job!',
-          text: 'SUCCESS DELETE ACCOUNT',
+          title: "Good job!",
+          text: "SUCCESS DELETE ACCOUNT",
         });
       })
       .catch(function (error) {
@@ -70,7 +69,7 @@ const MyProfile = () => {
       })
       .finally(() => {
         // setLoading(false);
-        navigate('/login', { replace: true });
+        navigate("/login", { replace: true });
       });
   };
 
@@ -84,25 +83,25 @@ const MyProfile = () => {
       formData.append(key, objSubmit[key]);
     }
     var requestOptions = {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
       body: formData,
     };
     axios({
-      method: 'put',
+      method: "put",
       url: `https://group3.altaproject.online/users`,
       data: formData,
 
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
     })
       .then((response) => {
         // handle success
         getmyProfile();
-        swal('Good job!', 'Success ', 'success');
+        swal("Good job!", "Success ", "success");
       })
       .catch(function (error) {
         // handle error
@@ -124,26 +123,35 @@ const MyProfile = () => {
     return (
       <Layout>
         <div className="justify-center p-20">
-          <form className="text-center border border-gray-400" onSubmit={(e) => handleSubmit(e)}>
+          <form
+            className="text-center border border-gray-400"
+            onSubmit={(e) => handleSubmit(e)}
+          >
             <div className="flex justify-center py-3 text-center mx-auto">
               <div className="px-4 py-5 rounded-lg  text-center w-48">
                 <div className="mb-4">
-                  <img className="w-auto mx-auto rounded-full object-cover object-center" src={profile.avatar_url} alt="Avatar Upload" />
+                  <img
+                    className="w-auto mx-auto rounded-full object-cover object-center"
+                    src={profile.avatar_url}
+                    alt="Avatar Upload"
+                  />
                 </div>
                 <label className="cursor-pointer mt-6">
                   <input
                     type="file"
                     onChange={(e) => {
                       setAvatar(URL.createObjectURL(e.target.files[0]));
-                      handleChange(e.target.files[0], 'avatar_url');
-                      //console.log(e.target.files[0]);
+                      handleChange(e.target.files[0], "avatar_url");
                     }}
                   />
                 </label>
               </div>
             </div>
             <div className="mb-6">
-              <label for="text" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="text"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 Your name
               </label>
               <input
@@ -151,11 +159,14 @@ const MyProfile = () => {
                 type="text"
                 id="name"
                 className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
-                onChange={(e) => handleChange(e.target.value, 'name')}
+                onChange={(e) => handleChange(e.target.value, "name")}
               />
             </div>
             <div className="mb-6">
-              <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="email"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 Your email
               </label>
               <input
@@ -163,11 +174,14 @@ const MyProfile = () => {
                 type="email"
                 id="email"
                 className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
-                onChange={(e) => handleChange(e.target.value, 'email')}
+                onChange={(e) => handleChange(e.target.value, "email")}
               />
             </div>
             <div className="mb-6">
-              <label for="notelp" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="notelp"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 No telp
               </label>
               <input
@@ -175,11 +189,14 @@ const MyProfile = () => {
                 type="text"
                 id="notelp"
                 className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
-                onChange={(e) => handleChange(e.target.value, 'handphone')}
+                onChange={(e) => handleChange(e.target.value, "handphone")}
               />
             </div>
             <div className="mb-6">
-              <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+              <label
+                for="password"
+                className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+              >
                 Your password
               </label>
               <input
@@ -187,11 +204,14 @@ const MyProfile = () => {
                 type="password"
                 id="password"
                 className="placeholder-gray-900 placeholder-opacity-75 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-full sm:w-1/2 p-2.5 "
-                onChange={(e) => handleChange(e.target.value, 'password')}
+                onChange={(e) => handleChange(e.target.value, "password")}
               />
             </div>
 
-            <button type="submit" className="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center mt-5">
+            <button
+              type="submit"
+              className="mb-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2 text-center mt-5"
+            >
               Edit
             </button>
           </form>

@@ -33,7 +33,6 @@ const EditResto = () => {
     })
       .then((response) => {
         // handle success
-        console.log(response);
         swal("Good job!", "Sukses Edit Resto ", "success");
         navigate("/");
       })
@@ -57,7 +56,6 @@ const EditResto = () => {
     let temp = { ...objSubmit };
     temp[key] = value;
     setObjSubmit(temp);
-    console.log(temp);
   };
 
   if (loading) {
