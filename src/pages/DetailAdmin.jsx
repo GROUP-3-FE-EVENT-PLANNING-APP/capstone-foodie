@@ -139,7 +139,7 @@ const Detail = () => {
               <div className="pl-14 pb-5">{data.owner_name}</div>
               <img
                 className="w-96 lg:mx-5 mb-10 px-5"
-                src="https://3.bp.blogspot.com/-FW2khSczuTU/UV95Wt115vI/AAAAAAAAALA/Sx2lwPRdUZc/s1600/surat%252Bijin.jpg"
+                src={data.file_image_url}
                 alt=""
               />
             </div>
@@ -148,9 +148,11 @@ const Detail = () => {
               <div className="mb-5">
                 <div className="text-xl">Fasilitas</div>
                 <ul className="text-sm pl-10">
-                  <li type="circle">Taman Bermain</li>
-                  <li type="circle">Kamar Mandi</li>
-                  <li type="circle">Musholla</li>
+                  {data.facilities.map((item) => (
+                    <li type="circle" className="text-sm">
+                      {item.facility}
+                    </li>
+                  ))}
                 </ul>
               </div>
               <div>Tabel : {data.table_quota}</div>
